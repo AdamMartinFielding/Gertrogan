@@ -10,7 +10,8 @@ package gertrogan;
  * @author ADAM
  */
 public class TitleMenu extends javax.swing.JFrame {
-
+    private Overworld overworld;
+    
     /**
      * Creates new form TitleMenu
      */
@@ -32,6 +33,11 @@ public class TitleMenu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnStart.setText("Start");
+        btnStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStartActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -52,6 +58,15 @@ public class TitleMenu extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
+        if(overworld == null){
+            overworld = new Overworld(this);
+        }
+        overworld.setVisible(true);
+        
+        this.setVisible(false);
+    }//GEN-LAST:event_btnStartActionPerformed
 
     /**
      * @param args the command line arguments
