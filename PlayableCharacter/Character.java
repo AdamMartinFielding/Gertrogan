@@ -20,8 +20,5 @@ public interface Character {
     public int getAttack();
     
     public int getHealth();
-    
-    
-    
-    
+
 }
