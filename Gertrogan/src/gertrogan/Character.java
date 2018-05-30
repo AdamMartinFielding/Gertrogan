@@ -11,11 +11,11 @@ package gertrogan;
  */
 public interface Character {
     
-    public void move(int x, int y);
     
-    public int getXPos();
+    
+    public int getCol();
 
-    public int getYPos();
+    public int getRow();
     
     public int getAttack();
     

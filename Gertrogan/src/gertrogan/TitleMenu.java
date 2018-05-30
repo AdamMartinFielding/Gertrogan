@@ -5,10 +5,6 @@
  */
 package gertrogan;
 
-/**
- *
- * @author ADAM
- */
 public class TitleMenu extends javax.swing.JFrame {
     private Overworld overworld;
     
@@ -60,6 +56,9 @@ public class TitleMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
+        /** This will eventually be changed to a key listener event.
+         Will also start the timer for the score of the users game.
+         */
         if(overworld == null){
             overworld = new Overworld(this);
         }
