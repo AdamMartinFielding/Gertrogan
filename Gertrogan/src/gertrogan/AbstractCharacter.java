@@ -22,11 +22,10 @@ abstract public class AbstractCharacter implements Character {
         this.attack = attack;
         this.health = health;
         alive = true;
-
     }
-    
-    public void move(int x, int y){
-        
+
+    public void move(int x, int y) {
+
     }
 
     public int getXPos() {
@@ -59,6 +58,18 @@ abstract public class AbstractCharacter implements Character {
 
     public void setHealth(int Health) {
         this.health = health;
+    }
+
+    public int takeDamage(int health, int damage) {
+
+        health = health - damage;
+
+        if (health <= 0) {
+            alive = false;
+            return 0;
+        } else {
+            return health;
+        }
     }
 
 }
