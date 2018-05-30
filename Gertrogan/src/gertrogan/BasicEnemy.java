@@ -5,34 +5,42 @@ Class for a basic enemy
  */
 package gertrogan;
 
-public class BasicEnemy {
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+
+public class BasicEnemy extends AbstractCharacter {
 
     //To do list
     //
     
 private int health;
 private int attackPow;
+private Icon image;
 
-    
-    public BasicEnemy(int xPos, int yPos){
-        health = 100;
-        attackPow = 10;
-        
-        
-        
+    public BasicEnemy(Icon image, int health, int attack, int col, int row){
+        super();
+        this.image = image;
+
     }
     
-    public int takeDamage(int playerHealth, int enemyDamage) {
-
-        playerHealth = playerHealth - enemyDamage;
-
-        if (playerHealth <= 0) {
-        //Player death method required
-        //death();
-            return 0;
-        } else {
-            return playerHealth;
+    public Icon getImage(){
+        return image;
+    }
+    
+    
+    public int doDamage(int baseAttack){
+        
+        int attackRoll = (int) (Math.random() * 100 + 1);
+        int returnedAttack = 0;
+        if (attackRoll <= 10) {
+             returnedAttack = 0;
+        } else if (attackRoll > 10 && attackRoll < 90){
+             returnedAttack = baseAttack;
+        } else if (attackRoll > 90){
+             returnedAttack = baseAttack * 2;
         }
+        return returnedAttack;
+        
     }
 
 }
