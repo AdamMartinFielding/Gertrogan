@@ -18,7 +18,7 @@ private int attackPow;
 private Icon image;
 
     public BasicEnemy(Icon image, int health, int attack, int col, int row){
-        super();
+        super(health, attack, col, row);
         this.image = image;
 
     }

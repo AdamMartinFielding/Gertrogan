@@ -12,11 +12,11 @@ import javax.swing.ImageIcon;
  *
  * @author Evan
  */
-public class Boss extends BasicEnemy {
+public class Boss extends AbstractCharacter {
     
     
-    public Boss(String type, Icon image, int health, int attack, int col, int row){
-        super();
+    public Boss(int health, int attack, int col, int row){
+        super(health, attack, col, row);
         
         
     }
