@@ -6,16 +6,19 @@
 package gertrogan;
 
 import java.awt.event.*;
-
-public class Overworld extends javax.swing.JFrame implements KeyListener {
-
+public class Overworld extends javax.swing.JFrame implements KeyListener{
     TitleMenu titleMenu;
-
     Protagonist gertrude = new Protagonist("gertrude", 20, 5, 1,1);
     
-
-    private BattleS battles;
-
+    
+    public Overworld(TitleMenu m) {
+        titleMenu = m;
+        initComponents();
+        setFocusable(true);
+        this.addKeyListener(this);
+        
+    }
+    
     /**
     if (battles == null) {
             battles = new BattleS(this);
@@ -27,16 +30,6 @@ public class Overworld extends javax.swing.JFrame implements KeyListener {
     this.setVisible(
 
     false);**/
-
-    
-    public Overworld(TitleMenu m) {
-        titleMenu = m;
-        initComponents();
-        setFocusable(true);
-        this.addKeyListener(this);
-        
-    }
-
     
     public void updateCharacterLocation(int newCol, int newRow){
         int col = gertrude.getCol();
@@ -411,15 +404,12 @@ public class Overworld extends javax.swing.JFrame implements KeyListener {
     
     
     public void keyTyped(KeyEvent e){
-
-
-    public void keyTyped(KeyEvent e) {
-
+        //not needed
     }
-
-    public void keyPressed(KeyEvent e) {
+    
+    
+    public void keyPressed(KeyEvent e){
         int keyCode = e.getKeyCode();
-
         int col = gertrude.getCol();
         int row = gertrude.getRow();
         if(keyCode == KeyEvent.VK_RIGHT || keyCode == KeyEvent.VK_D){
@@ -447,26 +437,16 @@ public class Overworld extends javax.swing.JFrame implements KeyListener {
         gertrude.setCol(col);
         gertrude.setRow(row);
         
-
-        int x = character.getX();
-        int y = character.getY();
-        if (keyCode == KeyEvent.VK_RIGHT || keyCode == KeyEvent.VK_D) {
-            x += 5;
-        } else if (keyCode == KeyEvent.VK_LEFT || keyCode == KeyEvent.VK_A) {
-            x -= 5;
-        } else if (keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_W) {
-            y -= 5;
-        } else if (keyCode == KeyEvent.VK_DOWN || keyCode == KeyEvent.VK_S) {
-            y += 5;
-        }
-
-        character.setLocation(x, y);
-
     }
-
-    public void keyReleased(KeyEvent e) {
+    
+    public void keyReleased(KeyEvent e){
         //not needed
     }
+    
+
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -476,7 +456,6 @@ public class Overworld extends javax.swing.JFrame implements KeyListener {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
 
         B1 = new javax.swing.JLabel();
         A1 = new javax.swing.JLabel();
@@ -559,259 +538,253 @@ public class Overworld extends javax.swing.JFrame implements KeyListener {
         J5 = new javax.swing.JLabel();
         J6 = new javax.swing.JLabel();
 
-
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 800));
 
-
-        B1.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        B1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         B1.setIconTextGap(0);
 
-        A1.setText("gertude");
-        A1.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        A1.setText("Gertrude");
+        A1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         A1.setIconTextGap(0);
 
-        B2.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        B2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         B2.setIconTextGap(0);
 
-        A2.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        A2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         A2.setIconTextGap(0);
 
-        D1.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        D1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         D1.setIconTextGap(0);
 
-        C1.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        C1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         C1.setIconTextGap(0);
 
-        D2.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        D2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         D2.setIconTextGap(0);
 
-        C2.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        C2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         C2.setIconTextGap(0);
 
-        D4.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        D4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         D4.setIconTextGap(0);
 
-        C4.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        C4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         C4.setIconTextGap(0);
 
-        B3.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        B3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         B3.setIconTextGap(0);
 
-        A3.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        A3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         A3.setIconTextGap(0);
 
-        B4.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        B4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         B4.setIconTextGap(0);
 
-        A4.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        A4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         A4.setIconTextGap(0);
 
-        D3.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        D3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         D3.setIconTextGap(0);
 
-        C3.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        C3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         C3.setIconTextGap(0);
 
-        F2.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        F2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         F2.setIconTextGap(0);
 
-        E2.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        E2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         E2.setIconTextGap(0);
 
-        F4.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        F4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         F4.setIconTextGap(0);
 
-        E4.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        E4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         E4.setIconTextGap(0);
 
-        F3.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        F3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         F3.setIconTextGap(0);
 
-        F1.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        F1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         F1.setIconTextGap(0);
 
-        E3.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        E3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         E3.setIconTextGap(0);
 
-        E1.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        E1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         E1.setIconTextGap(0);
 
-        G4.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        G4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         G4.setIconTextGap(0);
 
-        G3.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        G3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         G3.setIconTextGap(0);
 
-        G1.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        G1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         G1.setIconTextGap(0);
 
-        G2.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        G2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         G2.setIconTextGap(0);
 
-        H4.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        H4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         H4.setIconTextGap(0);
 
-        H3.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        H3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         H3.setIconTextGap(0);
 
-        H1.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        H1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         H1.setIconTextGap(0);
 
-        H2.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        H2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         H2.setIconTextGap(0);
 
-        I4.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        I4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         I4.setIconTextGap(0);
 
-        I3.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        I3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         I3.setIconTextGap(0);
 
-        I1.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        I1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         I1.setIconTextGap(0);
 
-        I2.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        I2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         I2.setIconTextGap(0);
 
-        J4.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        J4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         J4.setIconTextGap(0);
 
-        J3.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        J3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         J3.setIconTextGap(0);
 
-        J1.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        J1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         J1.setIconTextGap(0);
 
-        J2.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        J2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         J2.setIconTextGap(0);
 
-        B7.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        B7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         B7.setIconTextGap(0);
 
-        A7.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        A7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         A7.setIconTextGap(0);
 
-        B8.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        B8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         B8.setIconTextGap(0);
 
-        A8.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        A8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         A8.setIconTextGap(0);
 
-        B5.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        B5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         B5.setIconTextGap(0);
 
-        A5.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        A5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         A5.setIconTextGap(0);
 
-        B6.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        B6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         B6.setIconTextGap(0);
 
-        A6.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        A6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         A6.setIconTextGap(0);
 
-        C7.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        C7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         C7.setIconTextGap(0);
 
-        C8.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        C8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         C8.setIconTextGap(0);
 
-        C5.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        C5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         C5.setIconTextGap(0);
 
-        C6.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        C6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         C6.setIconTextGap(0);
 
-        D7.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        D7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         D7.setIconTextGap(0);
 
-        D8.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        D8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         D8.setIconTextGap(0);
 
-        D5.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        D5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         D5.setIconTextGap(0);
 
-        D6.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        D6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         D6.setIconTextGap(0);
 
-        G7.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        G7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         G7.setIconTextGap(0);
 
-        G8.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        G8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         G8.setIconTextGap(0);
 
-        G5.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        G5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         G5.setIconTextGap(0);
 
-        G6.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        G6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         G6.setIconTextGap(0);
 
-        H7.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        H7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         H7.setIconTextGap(0);
 
-        H8.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        H8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         H8.setIconTextGap(0);
 
-        H5.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        H5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         H5.setIconTextGap(0);
 
-        H6.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        H6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         H6.setIconTextGap(0);
 
-        F7.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        F7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         F7.setIconTextGap(0);
 
-        E7.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        E7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         E7.setIconTextGap(0);
 
-        F8.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        F8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         F8.setIconTextGap(0);
 
-        E8.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        E8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         E8.setIconTextGap(0);
 
-        F5.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        F5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         F5.setIconTextGap(0);
 
-        E5.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        E5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         E5.setIconTextGap(0);
 
-        F6.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        F6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         F6.setIconTextGap(0);
 
-        E6.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        E6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         E6.setIconTextGap(0);
 
-        I7.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        I7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         I7.setIconTextGap(0);
 
-        I8.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        I8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         I8.setIconTextGap(0);
 
-        I5.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        I5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         I5.setIconTextGap(0);
 
-        I6.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        I6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         I6.setIconTextGap(0);
 
-        J7.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        J7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         J7.setIconTextGap(0);
 
-        J8.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        J8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         J8.setIconTextGap(0);
 
-        J5.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        J5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         J5.setIconTextGap(0);
 
-        J6.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        J6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         J6.setIconTextGap(0);
-
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1140,20 +1113,12 @@ public class Overworld extends javax.swing.JFrame implements KeyListener {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(J8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(188, Short.MAX_VALUE))
-
-            .addGap(0, 633, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 438, Short.MAX_VALUE)
-
         );
 
         A1.getAccessibleContext().setAccessibleName("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
 
     
     
@@ -1239,9 +1204,5 @@ public class Overworld extends javax.swing.JFrame implements KeyListener {
     private javax.swing.JLabel J6;
     private javax.swing.JLabel J7;
     private javax.swing.JLabel J8;
-
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-
     // End of variables declaration//GEN-END:variables
 }

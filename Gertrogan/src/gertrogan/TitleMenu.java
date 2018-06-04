@@ -53,7 +53,6 @@ public class TitleMenu extends javax.swing.JFrame implements KeyListener {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setForeground(new java.awt.Color(0, 0, 0));
-        setPreferredSize(new java.awt.Dimension(800, 800));
 
         lblTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/Gertrogan Logo copy.png"))); // NOI18N
 
@@ -79,7 +78,7 @@ public class TitleMenu extends javax.swing.JFrame implements KeyListener {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblTitle)
                 .addGap(161, 161, 161)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(326, Short.MAX_VALUE))
