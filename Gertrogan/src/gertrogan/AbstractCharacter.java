@@ -20,7 +20,6 @@ abstract public class AbstractCharacter implements Character {
         this.xPos = xPos;
         this.yPos = yPos;
         this.attack = attack;
-        
         this.health = health;
         alive = true;
 
