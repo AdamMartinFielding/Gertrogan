@@ -6,10 +6,23 @@
 package gertrogan;
 
 import java.awt.event.*;
-public class Overworld extends javax.swing.JFrame implements KeyListener{
+
+public class Overworld extends javax.swing.JFrame implements KeyListener {
+
     TitleMenu titleMenu;
     private BattleS battles;
-    
+
+    /**
+    if (battles == null) {
+            battles = new BattleS(this);
+    }
+
+    battles.setVisible (
+    true);
+
+    this.setVisible(
+
+    false);**/
     
     public Overworld(TitleMenu m) {
         titleMenu = m;
@@ -17,38 +30,31 @@ public class Overworld extends javax.swing.JFrame implements KeyListener{
         setFocusable(true);
         this.addKeyListener(this);
     }
-    
-    
-    public void keyTyped(KeyEvent e){
+
+    public void keyTyped(KeyEvent e) {
         //not needed
     }
-    
-    
-    public void keyPressed(KeyEvent e){
+
+    public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
         int x = character.getX();
         int y = character.getY();
-        if(keyCode == KeyEvent.VK_RIGHT || keyCode == KeyEvent.VK_D){
+        if (keyCode == KeyEvent.VK_RIGHT || keyCode == KeyEvent.VK_D) {
             x += 5;
-        }else if(keyCode == KeyEvent.VK_LEFT || keyCode == KeyEvent.VK_A) {
+        } else if (keyCode == KeyEvent.VK_LEFT || keyCode == KeyEvent.VK_A) {
             x -= 5;
-        }else if(keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_W) {
+        } else if (keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_W) {
             y -= 5;
-        }else if(keyCode == KeyEvent.VK_DOWN || keyCode == KeyEvent.VK_S) {
+        } else if (keyCode == KeyEvent.VK_DOWN || keyCode == KeyEvent.VK_S) {
             y += 5;
         }
-        
-        character.setLocation(x,y);
+
+        character.setLocation(x, y);
     }
-    
-    public void keyReleased(KeyEvent e){
+
+    public void keyReleased(KeyEvent e) {
         //not needed
     }
-    
-
-    
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -111,18 +117,9 @@ public class Overworld extends javax.swing.JFrame implements KeyListener{
     }//GEN-LAST:event_characterActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        if (battles == null) {
-            battles = new BattleS(this);
-        }
-        battles.setVisible(true);
 
-        this.setVisible(false);
-    
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton character;
