@@ -6,10 +6,28 @@
 package gertrogan;
 
 import java.awt.event.*;
-public class Overworld extends javax.swing.JFrame implements KeyListener{
+
+public class Overworld extends javax.swing.JFrame implements KeyListener {
+
     TitleMenu titleMenu;
+
     Protagonist gertrude = new Protagonist("gertrude", 20, 5, 1,1);
     
+
+    private BattleS battles;
+
+    /**
+    if (battles == null) {
+            battles = new BattleS(this);
+    }
+
+    battles.setVisible (
+    true);
+
+    this.setVisible(
+
+    false);**/
+
     
     public Overworld(TitleMenu m) {
         titleMenu = m;
@@ -18,6 +36,7 @@ public class Overworld extends javax.swing.JFrame implements KeyListener{
         this.addKeyListener(this);
         
     }
+
     
     public void updateCharacterLocation(int newCol, int newRow){
         int col = gertrude.getCol();
@@ -392,12 +411,15 @@ public class Overworld extends javax.swing.JFrame implements KeyListener{
     
     
     public void keyTyped(KeyEvent e){
-        //not needed
+
+
+    public void keyTyped(KeyEvent e) {
+
     }
-    
-    
-    public void keyPressed(KeyEvent e){
+
+    public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
+
         int col = gertrude.getCol();
         int row = gertrude.getRow();
         if(keyCode == KeyEvent.VK_RIGHT || keyCode == KeyEvent.VK_D){
@@ -425,16 +447,26 @@ public class Overworld extends javax.swing.JFrame implements KeyListener{
         gertrude.setCol(col);
         gertrude.setRow(row);
         
+
+        int x = character.getX();
+        int y = character.getY();
+        if (keyCode == KeyEvent.VK_RIGHT || keyCode == KeyEvent.VK_D) {
+            x += 5;
+        } else if (keyCode == KeyEvent.VK_LEFT || keyCode == KeyEvent.VK_A) {
+            x -= 5;
+        } else if (keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_W) {
+            y -= 5;
+        } else if (keyCode == KeyEvent.VK_DOWN || keyCode == KeyEvent.VK_S) {
+            y += 5;
+        }
+
+        character.setLocation(x, y);
+
     }
-    
-    public void keyReleased(KeyEvent e){
+
+    public void keyReleased(KeyEvent e) {
         //not needed
     }
-    
-
-    
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -444,6 +476,7 @@ public class Overworld extends javax.swing.JFrame implements KeyListener{
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
 
         B1 = new javax.swing.JLabel();
         A1 = new javax.swing.JLabel();
@@ -526,8 +559,11 @@ public class Overworld extends javax.swing.JFrame implements KeyListener{
         J5 = new javax.swing.JLabel();
         J6 = new javax.swing.JLabel();
 
+
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 800));
+
 
         B1.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
         B1.setIconTextGap(0);
@@ -770,10 +806,12 @@ public class Overworld extends javax.swing.JFrame implements KeyListener{
         J6.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
         J6.setIconTextGap(0);
 
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1102,12 +1140,20 @@ public class Overworld extends javax.swing.JFrame implements KeyListener{
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(J8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(188, Short.MAX_VALUE))
+
+            .addGap(0, 633, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 438, Short.MAX_VALUE)
+
         );
 
         A1.getAccessibleContext().setAccessibleName("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
 
     
     
@@ -1193,5 +1239,9 @@ public class Overworld extends javax.swing.JFrame implements KeyListener{
     private javax.swing.JLabel J6;
     private javax.swing.JLabel J7;
     private javax.swing.JLabel J8;
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+
     // End of variables declaration//GEN-END:variables
 }
