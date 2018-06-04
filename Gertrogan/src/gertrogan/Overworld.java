@@ -31,6 +31,14 @@ public class Overworld extends javax.swing.JFrame implements KeyListener{
                 A3.setText("");
             }else if(row == 4){
                 A4.setText("");
+            }else if(row == 5){
+                A5.setText("");
+            }else if(row == 6){
+                A6.setText("");
+            }else if(row == 7){
+                A7.setText("");
+            }else if(row == 8){
+                A8.setText("");
             }
         }else if(col == 2){
             if(row == 1){
@@ -41,6 +49,14 @@ public class Overworld extends javax.swing.JFrame implements KeyListener{
                 B3.setText("");
             }else if(row == 4){
                 B4.setText("");
+            }else if(row == 5){
+                B5.setText("");
+            }else if(row == 6){
+                B6.setText("");
+            }else if(row == 7){
+                B7.setText("");
+            }else if(row == 8){
+                B8.setText("");
             }
         }else if(col == 3){
             if(row == 1){
@@ -51,6 +67,14 @@ public class Overworld extends javax.swing.JFrame implements KeyListener{
                 C3.setText("");
             }else if(row == 4){
                 C4.setText("");
+            }else if(row == 5){
+                C5.setText("");
+            }else if(row == 6){
+                C6.setText("");
+            }else if(row == 7){
+                C7.setText("");
+            }else if(row == 8){
+                C8.setText("");
             }
         }else if(col == 4){
             if(row == 1){
@@ -61,6 +85,14 @@ public class Overworld extends javax.swing.JFrame implements KeyListener{
                 D3.setText("");
             }else if(row == 4){
                 D4.setText("");
+            }else if(row == 5){
+                D5.setText("");
+            }else if(row == 6){
+                D6.setText("");
+            }else if(row == 7){
+                D7.setText("");
+            }else if(row == 8){
+                D8.setText("");
             }
         }else if(col == 5){
             if(row == 1){
@@ -71,6 +103,14 @@ public class Overworld extends javax.swing.JFrame implements KeyListener{
                 E3.setText("");
             }else if(row == 4){
                 E4.setText("");
+            }else if(row == 5){
+                E5.setText("");
+            }else if(row == 6){
+                E6.setText("");
+            }else if(row == 7){
+                E7.setText("");
+            }else if(row == 8){
+                E8.setText("");
             }
         }else if(col == 6){
             if(row == 1){
@@ -81,6 +121,14 @@ public class Overworld extends javax.swing.JFrame implements KeyListener{
                 F3.setText("");
             }else if(row == 4){
                 F4.setText("");
+            }else if(row == 5){
+                F5.setText("");
+            }else if(row == 6){
+                F6.setText("");
+            }else if(row == 7){
+                F7.setText("");
+            }else if(row == 8){
+                F8.setText("");
             }
         }else if(col == 7){
             if(row == 1){
@@ -91,6 +139,14 @@ public class Overworld extends javax.swing.JFrame implements KeyListener{
                 G3.setText("");
             }else if(row == 4){
                 G4.setText("");
+            }else if(row == 5){
+                G5.setText("");
+            }else if(row == 6){
+                G6.setText("");
+            }else if(row == 7){
+                G7.setText("");
+            }else if(row == 8){
+                G8.setText("");
             }
         }else if(col == 8){
             if(row == 1){
@@ -101,6 +157,50 @@ public class Overworld extends javax.swing.JFrame implements KeyListener{
                 H3.setText("");
             }else if(row == 4){
                 H4.setText("");
+            }else if(row == 5){
+                H5.setText("");
+            }else if(row == 6){
+                H6.setText("");
+            }else if(row == 7){
+                H7.setText("");
+            }else if(row == 8){
+                H8.setText("");
+            }
+        }else if(col == 9){
+            if(row == 1){
+                I1.setText("");
+            }else if(row == 2){
+                I2.setText("");
+            }else if(row == 3){
+                I3.setText("");
+            }else if(row == 4){
+                I4.setText("");
+            }else if(row == 5){
+                I5.setText("");
+            }else if(row == 6){
+                I6.setText("");
+            }else if(row == 7){
+                I7.setText("");
+            }else if(row == 8){
+                I8.setText("");
+            }
+        }else if(col == 10){
+            if(row == 1){
+                J1.setText("");
+            }else if(row == 2){
+                J2.setText("");
+            }else if(row == 3){
+                J3.setText("");
+            }else if(row == 4){
+                J4.setText("");
+            }else if(row == 5){
+                J5.setText("");
+            }else if(row == 6){
+                J6.setText("");
+            }else if(row == 7){
+                J7.setText("");
+            }else if(row == 8){
+                J8.setText("");
             }
         }
         
@@ -108,83 +208,183 @@ public class Overworld extends javax.swing.JFrame implements KeyListener{
         row = newRow;
         if(col == 1){
             if(row == 1){
-                A1.setText("gertrude");
+                A1.setText("Gertrude");
             }else if(row == 2){
-                A2.setText("gertrude");
+                A2.setText("Gertrude");
             }else if(row == 3){
-                A3.setText("gertrude");
+                A3.setText("Gertrude");
             }else if(row == 4){
-                A4.setText("gertrude");
+                A4.setText("Gertrude");
+            }else if(row == 5){
+                A5.setText("Gertrude");
+            }else if(row == 6){
+                A6.setText("Gertrude");
+            }else if(row == 7){
+                A7.setText("Gertrude");
+            }else if(row == 8){
+                A8.setText("Gertrude");
             }
         }else if(col == 2){
             if(row == 1){
-                B1.setText("gertrude");
+                B1.setText("Gertrude");
             }else if(row == 2){
-                B2.setText("gertrude");
+                B2.setText("Gertrude");
             }else if(row == 3){
-                B3.setText("gertrude");
+                B3.setText("Gertrude");
             }else if(row == 4){
-                B4.setText("gertrude");
+                B4.setText("Gertrude");
+            }else if(row == 5){
+                B5.setText("Gertrude");
+            }else if(row == 6){
+                B6.setText("Gertrude");
+            }else if(row == 7){
+                B7.setText("Gertrude");
+            }else if(row == 8){
+                B8.setText("Gertrude");
             }
         }else if(col == 3){
             if(row == 1){
-                C1.setText("gertrude");
+                C1.setText("Gertrude");
             }else if(row == 2){
-                C2.setText("gertrude");
+                C2.setText("Gertrude");
             }else if(row == 3){
-                C3.setText("gertrude");
+                C3.setText("Gertrude");
             }else if(row == 4){
-                C4.setText("gertrude");
+                C4.setText("Gertrude");
+            }else if(row == 5){
+                C5.setText("Gertrude");
+            }else if(row == 6){
+                C6.setText("Gertrude");
+            }else if(row == 7){
+                C7.setText("Gertrude");
+            }else if(row == 8){
+                C8.setText("Gertrude");
             }
         }else if(col == 4){
             if(row == 1){
-                D1.setText("gertrude");
+                D1.setText("Gertrude");
             }else if(row == 2){
-                D2.setText("gertrude");
+                D2.setText("Gertrude");
             }else if(row == 3){
-                D3.setText("gertrude");
+                D3.setText("Gertrude");
             }else if(row == 4){
-                D4.setText("gertrude");
+                D4.setText("Gertrude");
+            }else if(row == 5){
+                D5.setText("Gertrude");
+            }else if(row == 6){
+                D6.setText("Gertrude");
+            }else if(row == 7){
+                D7.setText("Gertrude");
+            }else if(row == 8){
+                D8.setText("Gertrude");
             }
         }else if(col == 5){
             if(row == 1){
-                E1.setText("gertrude");
+                E1.setText("Gertrude");
             }else if(row == 2){
-                E2.setText("gertrude");
+                E2.setText("Gertrude");
             }else if(row == 3){
-                E3.setText("gertrude");
+                E3.setText("Gertrude");
             }else if(row == 4){
-                E4.setText("gertrude");
+                E4.setText("Gertrude");
+            }else if(row == 5){
+                E5.setText("Gertrude");
+            }else if(row == 6){
+                E6.setText("Gertrude");
+            }else if(row == 7){
+                E7.setText("Gertrude");
+            }else if(row == 8){
+                E8.setText("Gertrude");
             }
         }else if(col == 6){
             if(row == 1){
-                F1.setText("gertrude");
+                F1.setText("Gertrude");
             }else if(row == 2){
-                F2.setText("gertrude");
+                F2.setText("Gertrude");
             }else if(row == 3){
-                F3.setText("gertrude");
+                F3.setText("Gertrude");
             }else if(row == 4){
-                F4.setText("gertrude");
+                F4.setText("Gertrude");
+            }else if(row == 5){
+                F5.setText("Gertrude");
+            }else if(row == 6){
+                F6.setText("Gertrude");
+            }else if(row == 7){
+                F7.setText("Gertrude");
+            }else if(row == 8){
+                F8.setText("Gertrude");
             }
         }else if(col == 7){
             if(row == 1){
-                G1.setText("gertrude");
+                G1.setText("Gertrude");
             }else if(row == 2){
-                G2.setText("gertrude");
+                G2.setText("Gertrude");
             }else if(row == 3){
-                G3.setText("gertrude");
+                G3.setText("Gertrude");
             }else if(row == 4){
-                G4.setText("gertrude");
+                G4.setText("Gertrude");
+            }else if(row == 5){
+                G5.setText("Gertrude");
+            }else if(row == 6){
+                G6.setText("Gertrude");
+            }else if(row == 7){
+                G7.setText("Gertrude");
+            }else if(row == 8){
+                G8.setText("Gertrude");
             }
         }else if(col == 8){
             if(row == 1){
-                H1.setText("gertrude");
+                H1.setText("Gertrude");
             }else if(row == 2){
-                H2.setText("gertrude");
+                H2.setText("Gertrude");
             }else if(row == 3){
-                H3.setText("gertrude");
+                H3.setText("Gertrude");
             }else if(row == 4){
-                H4.setText("gertrude");
+                H4.setText("Gertrude");
+            }else if(row == 5){
+                H5.setText("Gertrude");
+            }else if(row == 6){
+                H6.setText("Gertrude");
+            }else if(row == 7){
+                H7.setText("Gertrude");
+            }else if(row == 8){
+                H8.setText("Gertrude");
+            }
+        }else if(col == 9){
+            if(row == 1){
+                I1.setText("Gertrude");
+            }else if(row == 2){
+                I2.setText("Gertrude");
+            }else if(row == 3){
+                I3.setText("Gertrude");
+            }else if(row == 4){
+                I4.setText("Gertrude");
+            }else if(row == 5){
+                I5.setText("Gertrude");
+            }else if(row == 6){
+                I6.setText("Gertrude");
+            }else if(row == 7){
+                I7.setText("Gertrude");
+            }else if(row == 8){
+                I8.setText("Gertrude");
+            }
+        }else if(col == 10){
+            if(row == 1){
+                J1.setText("Gertrude");
+            }else if(row == 2){
+                J2.setText("Gertrude");
+            }else if(row == 3){
+                J3.setText("Gertrude");
+            }else if(row == 4){
+                J4.setText("Gertrude");
+            }else if(row == 5){
+                J5.setText("Gertrude");
+            }else if(row == 6){
+                J6.setText("Gertrude");
+            }else if(row == 7){
+                J7.setText("Gertrude");
+            }else if(row == 8){
+                J8.setText("Gertrude");
             }
         }
     }
@@ -201,13 +401,25 @@ public class Overworld extends javax.swing.JFrame implements KeyListener{
         int col = gertrude.getCol();
         int row = gertrude.getRow();
         if(keyCode == KeyEvent.VK_RIGHT || keyCode == KeyEvent.VK_D){
-            col++;
+            if(col != 10){
+                col++;
+            }
+            
         }else if(keyCode == KeyEvent.VK_LEFT || keyCode == KeyEvent.VK_A) {
-            col--;
+            if(col != 1){
+                col--;
+            }
+            
         }else if(keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_W) {
-            row--;
+            if(row != 1){
+                row--;
+            }
+            
         }else if(keyCode == KeyEvent.VK_DOWN || keyCode == KeyEvent.VK_S) {
-            row++;
+            if(row != 8){
+                row++;  
+            }
+            
         }
         updateCharacterLocation(col,row);
         gertrude.setCol(col);
