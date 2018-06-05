@@ -10,9 +10,7 @@ package gertrogan;
  * @author Evan
  */
 public interface Character {
-    
-    
-    
+
     public int getCol();
 
     public int getRow();
