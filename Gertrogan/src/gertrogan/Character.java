@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+Evan Hansen
+18/05/29
+Interface for the Character class
  */
 package gertrogan;
 
@@ -11,11 +11,11 @@ package gertrogan;
  */
 public interface Character {
     
-    public void move(int x, int y);
     
-    public int getXPos();
+    
+    public int getCol();
 
-    public int getYPos();
+    public int getRow();
     
     public int getAttack();
     

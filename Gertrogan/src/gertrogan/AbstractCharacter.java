@@ -10,39 +10,38 @@ package gertrogan;
  */
 abstract public class AbstractCharacter implements Character {
 
-    int xPos;
-    int yPos;
+    int col;
+    int row;
     int attack;
     int health;
     boolean alive;
 
-    public AbstractCharacter(int health, int attack, int xPos, int yPos) {
-        this.xPos = xPos;
-        this.yPos = yPos;
+    public AbstractCharacter(int health, int attack, int col, int row) {
+        this.col = col;
+        this.row = row;
         this.attack = attack;
         this.health = health;
         alive = true;
-
-    }
-    
-    public void move(int x, int y){
-        
     }
 
-    public int getXPos() {
-        return xPos;
+    public void move(int x, int y) {
+
     }
 
-    public void setXPos(int xPos) {
-        this.xPos = xPos;
+    public int getCol() {
+        return col;
     }
 
-    public int getYPos() {
-        return yPos;
+    public void setCol(int col) {
+        this.col = col;
     }
 
-    public void setYPos(int yPos) {
-        this.yPos = yPos;
+    public int getRow() {
+        return row;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
     }
 
     public int getAttack() {
@@ -59,6 +58,18 @@ abstract public class AbstractCharacter implements Character {
 
     public void setHealth(int Health) {
         this.health = health;
+    }
+
+    public int takeDamage(int health, int damage) {
+
+        health = health - damage;
+
+        if (health <= 0) {
+            alive = false;
+            return 0;
+        } else {
+            return health;
+        }
     }
 
 }
