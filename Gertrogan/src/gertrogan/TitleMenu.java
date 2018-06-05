@@ -5,9 +5,11 @@
  */
 package gertrogan;
 
-import java.awt.event.*;
-
-public class TitleMenu extends javax.swing.JFrame implements KeyListener {
+/**
+ *
+ * @author ADAM
+ */
+public class TitleMenu extends javax.swing.JFrame {
     private Overworld overworld;
     
     /**
@@ -15,28 +17,6 @@ public class TitleMenu extends javax.swing.JFrame implements KeyListener {
      */
     public TitleMenu() {
         initComponents();
-        setFocusable(true);
-        this.addKeyListener(this);
-    }
-    
-    public void keyTyped(KeyEvent e){
-        //not needed
-    }
-    
-    
-    public void keyPressed(KeyEvent e){
-        if(overworld == null){
-            overworld = new Overworld(this);
-        }
-        overworld.setVisible(true);
-        
-        this.setVisible(false);
-        
-        
-    }
-    
-    public void keyReleased(KeyEvent e){
-        //not needed
     }
 
     /**
@@ -48,44 +28,45 @@ public class TitleMenu extends javax.swing.JFrame implements KeyListener {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblTitle = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        btnStart = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setForeground(new java.awt.Color(0, 0, 0));
 
-        lblTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/Gertrogan Logo copy.png"))); // NOI18N
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Press any key to start");
+        btnStart.setText("Start");
+        btnStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStartActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addGap(199, 199, 199)
+                .addComponent(btnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(229, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(lblTitle)
-                .addGap(161, 161, 161)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(326, Short.MAX_VALUE))
+                .addGap(160, 160, 160)
+                .addComponent(btnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(257, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
+        if(overworld == null){
+            overworld = new Overworld(this);
+        }
+        overworld.setVisible(true);
+        
+        this.setVisible(false);
+    }//GEN-LAST:event_btnStartActionPerformed
 
     /**
      * @param args the command line arguments
@@ -123,7 +104,6 @@ public class TitleMenu extends javax.swing.JFrame implements KeyListener {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel lblTitle;
+    private javax.swing.JButton btnStart;
     // End of variables declaration//GEN-END:variables
 }

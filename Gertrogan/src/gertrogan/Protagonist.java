@@ -13,8 +13,8 @@ public class Protagonist extends AbstractCharacter {
     
     String name;
     
-    public Protagonist(String name,int health, int attack, int col, int row){
-        super(health, attack, col, row);
+    public Protagonist(String name,int health, int attack, int xPos, int yPos){
+        super(health, attack, xPos, yPos);
         this.name = name;
         
     }
