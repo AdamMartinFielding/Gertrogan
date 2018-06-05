@@ -17,7 +17,7 @@ private int health;
 private int attackPow;
 private Icon image;
 
-    public BasicEnemy(Icon image, int health, int attack, int col, int row){
+    public BasicEnemy(int health, int attack, int col, int row){
         super(health, attack, col, row);
         this.image = image;
 
@@ -28,19 +28,28 @@ private Icon image;
     }
     
     
-    public int doDamage(int baseAttack){
+    public int doDamage(){
         
         int attackRoll = (int) (Math.random() * 100 + 1);
         int returnedAttack = 0;
         if (attackRoll <= 10) {
              returnedAttack = 0;
         } else if (attackRoll > 10 && attackRoll < 90){
-             returnedAttack = baseAttack;
+             returnedAttack = attack;
         } else if (attackRoll > 90){
-             returnedAttack = baseAttack * 2;
+             returnedAttack = attack * 2;
         }
         return returnedAttack;
         
     }
 
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+    
+   
 }
