@@ -29,7 +29,7 @@ public class Battle extends JPanel implements KeyListener {
     String message = "";
     int j;
     Protagonist player = new Protagonist("M",health,5,5,5);
-
+    BasicEnemy enemy = new BasicEnemy(2,2);
     public Battle() {
         ActionListener al = new ActionListener() {
             //when the timer ticks
