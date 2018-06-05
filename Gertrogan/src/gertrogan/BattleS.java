@@ -21,7 +21,7 @@ Overworld overworld;
         //set title of the JFrame
         setTitle("Simple Java 2D example");
         //add a custom JPanel to draw on
-        add(new Battle());
+        add(new Battle(overworld));
         //set the size of the window
         setSize(800, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
