@@ -4,12 +4,10 @@ Evan Hansen
  */
 package gertrogan;
 
-/**
- *
- * @author Evan Hansen
- */
+import javax.swing.ImageIcon;
 abstract public class AbstractCharacter implements Character {
-
+    
+    ImageIcon image;
     int col;
     int row;
     int attack;
@@ -23,11 +21,20 @@ abstract public class AbstractCharacter implements Character {
         this.health = health;
         alive = true;
     }
-
-    public void move(int x, int y) {
-
+    
+    public AbstractCharacter(ImageIcon image,int health, int attack, int col, int row) {
+        this.col = col;
+        this.row = row;
+        this.attack = attack;
+        this.health = health;
+        this.image = image;
+        alive = true;
     }
 
+   public ImageIcon getImage(){
+        return image;
+    }
+   
     public int getCol() {
         return col;
     }

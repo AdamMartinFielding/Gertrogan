@@ -18,6 +18,7 @@ Overworld overworld;
 
     //create the custom JFrame
     private void initUI() {
+        
         //set title of the JFrame
         setTitle("Simple Java 2D example");
         //add a custom JPanel to draw on

@@ -6,10 +6,12 @@
 package gertrogan;
 
 import java.awt.event.*;
-
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+import java.io.*;
 public class TitleMenu extends javax.swing.JFrame implements KeyListener {
     private Overworld overworld;
-    
+    AudioStream audios;
     /**
      * Creates new form TitleMenu
      */
@@ -17,6 +19,15 @@ public class TitleMenu extends javax.swing.JFrame implements KeyListener {
         initComponents();
         setFocusable(true);
         this.addKeyListener(this);
+        InputStream music;
+        try{
+            music = new FileInputStream(new File("src\\gertrogan\\Menu Music.wav"));
+            audios = new AudioStream(music);
+            AudioPlayer.player.start(audios);
+            
+        }catch(IOException e){
+            System.out.println("Error: " + e);
+        }
     }
     
     public void keyTyped(KeyEvent e){
@@ -31,7 +42,7 @@ public class TitleMenu extends javax.swing.JFrame implements KeyListener {
         overworld.setVisible(true);
         
         this.setVisible(false);
-        
+        AudioPlayer.player.stop(audios);
         
     }
     
@@ -48,40 +59,22 @@ public class TitleMenu extends javax.swing.JFrame implements KeyListener {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblTitle = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setForeground(new java.awt.Color(0, 0, 0));
 
-        lblTitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/Gertrogan Logo copy.png"))); // NOI18N
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Press any key to start");
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/gertrogran title.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(50, Short.MAX_VALUE))
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(lblTitle)
-                .addGap(161, 161, 161)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(326, Short.MAX_VALUE))
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -123,7 +116,6 @@ public class TitleMenu extends javax.swing.JFrame implements KeyListener {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel lblTitle;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

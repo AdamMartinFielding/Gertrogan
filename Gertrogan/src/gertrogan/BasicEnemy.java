@@ -5,7 +5,6 @@ Class for a basic enemy
  */
 package gertrogan;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 public class BasicEnemy extends AbstractCharacter {
@@ -15,17 +14,21 @@ public class BasicEnemy extends AbstractCharacter {
     
 private int health;
 private int attackPow;
-private Icon image;
+
 
     public BasicEnemy(int health, int attack, int col, int row){
         super(health, attack, col, row);
-        this.image = image;
+        
 
     }
     
-    public Icon getImage(){
-        return image;
+    public BasicEnemy(ImageIcon image,int health, int attack, int col, int row){
+        super(image,health, attack, col, row);
+        
+
     }
+    
+    
     
     
     public int doDamage(){
