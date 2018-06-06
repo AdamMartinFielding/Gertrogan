@@ -6,213 +6,243 @@
 package gertrogan;
 
 import java.awt.event.*;
-
+import javax.swing.*;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+import java.io.*;
 public class Overworld extends javax.swing.JFrame implements KeyListener {
-
+    AudioStream audios;
     TitleMenu titleMenu;
-    Protagonist gertrude = new Protagonist("gertrude", 20, 5, 1, 1);
     BattleS battles;
-
+    
+    private ImageIcon protagonist = new ImageIcon("src\\gertrogan\\tileGertrude.png");
+    private ImageIcon tile = new ImageIcon("src\\gertrogan\\tileDefault.png");
+    private ImageIcon gromlinTile = new ImageIcon("src\\gertrogan\\tileGromlin.png");
+    public Protagonist gertrude = new Protagonist(protagonist,"gertrude", 100, 10, 1, 4);
+    public BasicEnemy gromlin = new BasicEnemy(gromlinTile, 100,10,9, 2);
+    
     public Overworld(TitleMenu m) {
         titleMenu = m;
         initComponents();
         setFocusable(true);
         this.addKeyListener(this);
-
+        updateCharacterLocation(gertrude, gertrude.getCol(),gertrude.getRow());
+        updateCharacterLocation(gromlin, gromlin.getCol(),gromlin.getRow());
+        InputStream music;
+        try{
+            music = new FileInputStream(new File("src\\gertrogan\\Overworld Music.wav"));
+            audios = new AudioStream(music);
+            AudioPlayer.player.start(audios);
+            
+        }catch(IOException e){
+            System.out.println("Error: " + e);
+        }
     }
-
+    
+    public void startMusic(){
+        InputStream music;
+        try{
+            music = new FileInputStream(new File("src\\gertrogan\\Overworld Music.wav"));
+            audios = new AudioStream(music);
+            AudioPlayer.player.start(audios);
+            
+        }catch(IOException e){
+            System.out.println("Error: " + e);
+        }
+    }
+    
     /**
-     *
-     */
-    public void updateCharacterLocation(int newCol, int newRow) {
-        int col = gertrude.getCol();
-        int row = gertrude.getRow();
-        if (col == 1) {
-            if (row == 1) {
-
-                battles = new BattleS(this);
+    battles = new BattleS(this);
                 battles.setVisible(
                         true);
 
                 this.setVisible(
                         false);
-                A1.setText("");
+    **/
+
+    
+    public void updateCharacterLocation(AbstractCharacter character,int newCol, int newRow) {
+        int col = character.getCol();
+        int row = character.getRow();
+        if (col == 1) {
+            if (row == 1) {
+                A1.setIcon(tile);
             } else if (row == 2) {
-                A2.setText("");
+                A2.setIcon(tile);
             } else if (row == 3) {
-                A3.setText("");
+                A3.setIcon(tile);
             } else if (row == 4) {
-                A4.setText("");
+                A4.setIcon(tile);
             } else if (row == 5) {
-                A5.setText("");
+                A5.setIcon(tile);
             } else if (row == 6) {
-                A6.setText("");
+                A6.setIcon(tile);
             } else if (row == 7) {
-                A7.setText("");
+                A7.setIcon(tile);
             } else if (row == 8) {
-                A8.setText("");
+                A8.setIcon(tile);
             }
         } else if (col == 2) {
             if (row == 1) {
-                B1.setText("");
+                B1.setIcon(tile);
             } else if (row == 2) {
-                B2.setText("");
+                B2.setIcon(tile);
             } else if (row == 3) {
-                B3.setText("");
+                B3.setIcon(tile);
             } else if (row == 4) {
-                B4.setText("");
+                B4.setIcon(tile);
             } else if (row == 5) {
-                B5.setText("");
+                B5.setIcon(tile);
             } else if (row == 6) {
-                B6.setText("");
+                B6.setIcon(tile);
             } else if (row == 7) {
-                B7.setText("");
+                B7.setIcon(tile);
             } else if (row == 8) {
-                B8.setText("");
+                B8.setIcon(tile);
             }
         } else if (col == 3) {
             if (row == 1) {
-                C1.setText("");
+                C1.setIcon(tile);
             } else if (row == 2) {
-                C2.setText("");
+                C2.setIcon(tile);
             } else if (row == 3) {
-                C3.setText("");
+                C3.setIcon(tile);
             } else if (row == 4) {
-                C4.setText("");
+                C4.setIcon(tile);
             } else if (row == 5) {
-                C5.setText("");
+                C5.setIcon(tile);
             } else if (row == 6) {
-                C6.setText("");
+                C6.setIcon(tile);
             } else if (row == 7) {
-                C7.setText("");
+                C7.setIcon(tile);
             } else if (row == 8) {
-                C8.setText("");
+                C8.setIcon(tile);
             }
         } else if (col == 4) {
             if (row == 1) {
-                D1.setText("");
+                D1.setIcon(tile);
             } else if (row == 2) {
-                D2.setText("");
+                D2.setIcon(tile);
             } else if (row == 3) {
-                D3.setText("");
+                D3.setIcon(tile);
             } else if (row == 4) {
-                D4.setText("");
+                D4.setIcon(tile);
             } else if (row == 5) {
-                D5.setText("");
+                D5.setIcon(tile);
             } else if (row == 6) {
-                D6.setText("");
+                D6.setIcon(tile);
             } else if (row == 7) {
-                D7.setText("");
+                D7.setIcon(tile);
             } else if (row == 8) {
-                D8.setText("");
+                D8.setIcon(tile);
             }
         } else if (col == 5) {
             if (row == 1) {
-                E1.setText("");
+                E1.setIcon(tile);
             } else if (row == 2) {
-                E2.setText("");
+                E2.setIcon(tile);
             } else if (row == 3) {
-                E3.setText("");
+                E3.setIcon(tile);
             } else if (row == 4) {
-                E4.setText("");
+                E4.setIcon(tile);
             } else if (row == 5) {
-                E5.setText("");
+                E5.setIcon(tile);
             } else if (row == 6) {
-                E6.setText("");
+                E6.setIcon(tile);
             } else if (row == 7) {
-                E7.setText("");
+                E7.setIcon(tile);
             } else if (row == 8) {
-                E8.setText("");
+                E8.setIcon(tile);
             }
         } else if (col == 6) {
             if (row == 1) {
-                F1.setText("");
+                F1.setIcon(tile);
             } else if (row == 2) {
-                F2.setText("");
+                F2.setIcon(tile);
             } else if (row == 3) {
-                F3.setText("");
+                F3.setIcon(tile);
             } else if (row == 4) {
-                F4.setText("");
+                F4.setIcon(tile);
             } else if (row == 5) {
-                F5.setText("");
+                F5.setIcon(tile);
             } else if (row == 6) {
-                F6.setText("");
+                F6.setIcon(tile);
             } else if (row == 7) {
-                F7.setText("");
+                F7.setIcon(tile);
             } else if (row == 8) {
-                F8.setText("");
+                F8.setIcon(tile);
             }
         } else if (col == 7) {
             if (row == 1) {
-                G1.setText("");
+                G1.setIcon(tile);
             } else if (row == 2) {
-                G2.setText("");
+                G2.setIcon(tile);
             } else if (row == 3) {
-                G3.setText("");
+                G3.setIcon(tile);
             } else if (row == 4) {
-                G4.setText("");
+                G4.setIcon(tile);
             } else if (row == 5) {
-                G5.setText("");
+                G5.setIcon(tile);
             } else if (row == 6) {
-                G6.setText("");
+                G6.setIcon(tile);
             } else if (row == 7) {
-                G7.setText("");
+                G7.setIcon(tile);
             } else if (row == 8) {
-                G8.setText("");
+                G8.setIcon(tile);
             }
         } else if (col == 8) {
             if (row == 1) {
-                H1.setText("");
+                H1.setIcon(tile);
             } else if (row == 2) {
-                H2.setText("");
+                H2.setIcon(tile);
             } else if (row == 3) {
-                H3.setText("");
+                H3.setIcon(tile);
             } else if (row == 4) {
-                H4.setText("");
+                H4.setIcon(tile);
             } else if (row == 5) {
-                H5.setText("");
+                H5.setIcon(tile);
             } else if (row == 6) {
-                H6.setText("");
+                H6.setIcon(tile);
             } else if (row == 7) {
-                H7.setText("");
+                H7.setIcon(tile);
             } else if (row == 8) {
-                H8.setText("");
+                H8.setIcon(tile);
             }
         } else if (col == 9) {
             if (row == 1) {
-                I1.setText("");
+                I1.setIcon(tile);
             } else if (row == 2) {
-                I2.setText("");
+                I2.setIcon(tile);
             } else if (row == 3) {
-                I3.setText("");
+                I3.setIcon(tile);
             } else if (row == 4) {
-                I4.setText("");
+                I4.setIcon(tile);
             } else if (row == 5) {
-                I5.setText("");
+                I5.setIcon(tile);
             } else if (row == 6) {
-                I6.setText("");
+                I6.setIcon(tile);
             } else if (row == 7) {
-                I7.setText("");
+                I7.setIcon(tile);
             } else if (row == 8) {
-                I8.setText("");
+                I8.setIcon(tile);
             }
         } else if (col == 10) {
             if (row == 1) {
-                J1.setText("");
+                J1.setIcon(tile);
             } else if (row == 2) {
-                J2.setText("");
+                J2.setIcon(tile);
             } else if (row == 3) {
-                J3.setText("");
+                J3.setIcon(tile);
             } else if (row == 4) {
-                J4.setText("");
+                J4.setIcon(tile);
             } else if (row == 5) {
-                J5.setText("");
+                J5.setIcon(tile);
             } else if (row == 6) {
-                J6.setText("");
+                J6.setIcon(tile);
             } else if (row == 7) {
-                J7.setText("");
+                J7.setIcon(tile);
             } else if (row == 8) {
-                J8.setText("");
+                J8.setIcon(tile);
             }
         }
 
@@ -220,183 +250,183 @@ public class Overworld extends javax.swing.JFrame implements KeyListener {
         row = newRow;
         if (col == 1) {
             if (row == 1) {
-                A1.setText("Gertrude");
+                A1.setIcon(character.getImage());
             } else if (row == 2) {
-                A2.setText("Gertrude");
+                A2.setIcon(character.getImage());
             } else if (row == 3) {
-                A3.setText("Gertrude");
+                A3.setIcon(character.getImage());
             } else if (row == 4) {
-                A4.setText("Gertrude");
+                A4.setIcon(character.getImage());
             } else if (row == 5) {
-                A5.setText("Gertrude");
+                A5.setIcon(character.getImage());
             } else if (row == 6) {
-                A6.setText("Gertrude");
+                A6.setIcon(character.getImage());
             } else if (row == 7) {
-                A7.setText("Gertrude");
+                A7.setIcon(character.getImage());
             } else if (row == 8) {
-                A8.setText("Gertrude");
+                A8.setIcon(character.getImage());
             }
         } else if (col == 2) {
             if (row == 1) {
-                B1.setText("Gertrude");
+                B1.setIcon(character.getImage());
             } else if (row == 2) {
-                B2.setText("Gertrude");
+                B2.setIcon(character.getImage());
             } else if (row == 3) {
-                B3.setText("Gertrude");
+                B3.setIcon(character.getImage());
             } else if (row == 4) {
-                B4.setText("Gertrude");
+                B4.setIcon(character.getImage());
             } else if (row == 5) {
-                B5.setText("Gertrude");
+                B5.setIcon(character.getImage());
             } else if (row == 6) {
-                B6.setText("Gertrude");
+                B6.setIcon(character.getImage());
             } else if (row == 7) {
-                B7.setText("Gertrude");
+                B7.setIcon(character.getImage());
             } else if (row == 8) {
-                B8.setText("Gertrude");
+                B8.setIcon(character.getImage());
             }
         } else if (col == 3) {
             if (row == 1) {
-                C1.setText("Gertrude");
+                C1.setIcon(character.getImage());
             } else if (row == 2) {
-                C2.setText("Gertrude");
+                C2.setIcon(character.getImage());
             } else if (row == 3) {
-                C3.setText("Gertrude");
+                C3.setIcon(character.getImage());
             } else if (row == 4) {
-                C4.setText("Gertrude");
+                C4.setIcon(character.getImage());
             } else if (row == 5) {
-                C5.setText("Gertrude");
+                C5.setIcon(character.getImage());
             } else if (row == 6) {
-                C6.setText("Gertrude");
+                C6.setIcon(character.getImage());
             } else if (row == 7) {
-                C7.setText("Gertrude");
+                C7.setIcon(character.getImage());
             } else if (row == 8) {
-                C8.setText("Gertrude");
+                C8.setIcon(character.getImage());
             }
         } else if (col == 4) {
             if (row == 1) {
-                D1.setText("Gertrude");
+                D1.setIcon(character.getImage());
             } else if (row == 2) {
-                D2.setText("Gertrude");
+                D2.setIcon(character.getImage());
             } else if (row == 3) {
-                D3.setText("Gertrude");
+                D3.setIcon(character.getImage());
             } else if (row == 4) {
-                D4.setText("Gertrude");
+                D4.setIcon(character.getImage());
             } else if (row == 5) {
-                D5.setText("Gertrude");
+                D5.setIcon(character.getImage());
             } else if (row == 6) {
-                D6.setText("Gertrude");
+                D6.setIcon(character.getImage());
             } else if (row == 7) {
-                D7.setText("Gertrude");
+                D7.setIcon(character.getImage());
             } else if (row == 8) {
-                D8.setText("Gertrude");
+                D8.setIcon(character.getImage());
             }
         } else if (col == 5) {
             if (row == 1) {
-                E1.setText("Gertrude");
+                E1.setIcon(character.getImage());
             } else if (row == 2) {
-                E2.setText("Gertrude");
+                E2.setIcon(character.getImage());
             } else if (row == 3) {
-                E3.setText("Gertrude");
+                E3.setIcon(character.getImage());
             } else if (row == 4) {
-                E4.setText("Gertrude");
+                E4.setIcon(character.getImage());
             } else if (row == 5) {
-                E5.setText("Gertrude");
+                E5.setIcon(character.getImage());
             } else if (row == 6) {
-                E6.setText("Gertrude");
+                E6.setIcon(character.getImage());
             } else if (row == 7) {
-                E7.setText("Gertrude");
+                E7.setIcon(character.getImage());
             } else if (row == 8) {
-                E8.setText("Gertrude");
+                E8.setIcon(character.getImage());
             }
         } else if (col == 6) {
             if (row == 1) {
-                F1.setText("Gertrude");
+                F1.setIcon(character.getImage());
             } else if (row == 2) {
-                F2.setText("Gertrude");
+                F2.setIcon(character.getImage());
             } else if (row == 3) {
-                F3.setText("Gertrude");
+                F3.setIcon(character.getImage());
             } else if (row == 4) {
-                F4.setText("Gertrude");
+                F4.setIcon(character.getImage());
             } else if (row == 5) {
-                F5.setText("Gertrude");
+                F5.setIcon(character.getImage());
             } else if (row == 6) {
-                F6.setText("Gertrude");
+                F6.setIcon(character.getImage());
             } else if (row == 7) {
-                F7.setText("Gertrude");
+                F7.setIcon(character.getImage());
             } else if (row == 8) {
-                F8.setText("Gertrude");
+                F8.setIcon(character.getImage());
             }
         } else if (col == 7) {
             if (row == 1) {
-                G1.setText("Gertrude");
+                G1.setIcon(character.getImage());
             } else if (row == 2) {
-                G2.setText("Gertrude");
+                G2.setIcon(character.getImage());
             } else if (row == 3) {
-                G3.setText("Gertrude");
+                G3.setIcon(character.getImage());
             } else if (row == 4) {
-                G4.setText("Gertrude");
+                G4.setIcon(character.getImage());
             } else if (row == 5) {
-                G5.setText("Gertrude");
+                G5.setIcon(character.getImage());
             } else if (row == 6) {
-                G6.setText("Gertrude");
+                G6.setIcon(character.getImage());
             } else if (row == 7) {
-                G7.setText("Gertrude");
+                G7.setIcon(character.getImage());
             } else if (row == 8) {
-                G8.setText("Gertrude");
+                G8.setIcon(character.getImage());
             }
         } else if (col == 8) {
             if (row == 1) {
-                H1.setText("Gertrude");
+                H1.setIcon(character.getImage());
             } else if (row == 2) {
-                H2.setText("Gertrude");
+                H2.setIcon(character.getImage());
             } else if (row == 3) {
-                H3.setText("Gertrude");
+                H3.setIcon(character.getImage());
             } else if (row == 4) {
-                H4.setText("Gertrude");
+                H4.setIcon(character.getImage());
             } else if (row == 5) {
-                H5.setText("Gertrude");
+                H5.setIcon(character.getImage());
             } else if (row == 6) {
-                H6.setText("Gertrude");
+                H6.setIcon(character.getImage());
             } else if (row == 7) {
-                H7.setText("Gertrude");
+                H7.setIcon(character.getImage());
             } else if (row == 8) {
-                H8.setText("Gertrude");
+                H8.setIcon(character.getImage());
             }
         } else if (col == 9) {
             if (row == 1) {
-                I1.setText("Gertrude");
+                I1.setIcon(character.getImage());
             } else if (row == 2) {
-                I2.setText("Gertrude");
+                I2.setIcon(character.getImage());
             } else if (row == 3) {
-                I3.setText("Gertrude");
+                I3.setIcon(character.getImage());
             } else if (row == 4) {
-                I4.setText("Gertrude");
+                I4.setIcon(character.getImage());
             } else if (row == 5) {
-                I5.setText("Gertrude");
+                I5.setIcon(character.getImage());
             } else if (row == 6) {
-                I6.setText("Gertrude");
+                I6.setIcon(character.getImage());
             } else if (row == 7) {
-                I7.setText("Gertrude");
+                I7.setIcon(character.getImage());
             } else if (row == 8) {
-                I8.setText("Gertrude");
+                I8.setIcon(character.getImage());
             }
         } else if (col == 10) {
             if (row == 1) {
-                J1.setText("Gertrude");
+                J1.setIcon(character.getImage());
             } else if (row == 2) {
-                J2.setText("Gertrude");
+                J2.setIcon(character.getImage());
             } else if (row == 3) {
-                J3.setText("Gertrude");
+                J3.setIcon(character.getImage());
             } else if (row == 4) {
-                J4.setText("Gertrude");
+                J4.setIcon(character.getImage());
             } else if (row == 5) {
-                J5.setText("Gertrude");
+                J5.setIcon(character.getImage());
             } else if (row == 6) {
-                J6.setText("Gertrude");
+                J6.setIcon(character.getImage());
             } else if (row == 7) {
-                J7.setText("Gertrude");
+                J7.setIcon(character.getImage());
             } else if (row == 8) {
-                J8.setText("Gertrude");
+                J8.setIcon(character.getImage());
             }
         }
     }
@@ -430,14 +460,59 @@ public class Overworld extends javax.swing.JFrame implements KeyListener {
             }
 
         }
-        updateCharacterLocation(col, row);
+        updateCharacterLocation(gertrude, col, row);
         gertrude.setCol(col);
         gertrude.setRow(row);
-
+        moveEnemies();
     }
 
     public void keyReleased(KeyEvent e) {
         //not needed
+    }
+    
+    public void moveEnemies(){
+        int colG = gertrude.getCol();
+        int rowG = gertrude.getRow();
+        int col = gromlin.getCol();
+        int row = gromlin.getRow();
+        
+        if(colG > col){
+            col++;
+            if((col == colG ) && (row  == rowG)){
+                battles = new BattleS(this);
+                battles.setVisible(true);
+                this.setVisible(false);
+                AudioPlayer.player.stop(audios);
+            }
+        }else if(colG < col){
+            col--;
+            if((col == colG ) && (row  == rowG)){
+                battles = new BattleS(this);
+                battles.setVisible(true);
+                this.setVisible(false);
+                AudioPlayer.player.stop(audios);
+            }
+        }
+        if(rowG > row){
+            row++;
+            if((col == colG ) && (row  == rowG)){
+                battles = new BattleS(this);
+                battles.setVisible(true);
+                this.setVisible(false);
+                AudioPlayer.player.stop(audios);
+            }
+        }else if(rowG < row){
+            row --;
+            if((col == colG ) && (row  == rowG)){
+                battles = new BattleS(this);
+                battles.setVisible(true);
+                this.setVisible(false);
+                AudioPlayer.player.stop(audios);
+            }
+        }
+        updateCharacterLocation(gromlin, col,row);
+        gromlin.setCol(col);
+        gromlin.setRow(row);
     }
 
     /**
@@ -532,244 +607,323 @@ public class Overworld extends javax.swing.JFrame implements KeyListener {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        B1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         B1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         B1.setIconTextGap(0);
 
-        A1.setText("Gertrude");
+        A1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         A1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         A1.setIconTextGap(0);
 
+        B2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         B2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         B2.setIconTextGap(0);
 
+        A2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         A2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         A2.setIconTextGap(0);
 
+        D1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         D1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         D1.setIconTextGap(0);
 
+        C1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         C1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         C1.setIconTextGap(0);
 
+        D2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         D2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         D2.setIconTextGap(0);
 
+        C2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         C2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         C2.setIconTextGap(0);
 
+        D4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         D4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         D4.setIconTextGap(0);
 
+        C4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         C4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         C4.setIconTextGap(0);
 
+        B3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         B3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         B3.setIconTextGap(0);
 
+        A3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         A3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         A3.setIconTextGap(0);
 
+        B4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         B4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         B4.setIconTextGap(0);
 
+        A4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         A4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         A4.setIconTextGap(0);
 
+        D3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         D3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         D3.setIconTextGap(0);
 
+        C3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         C3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         C3.setIconTextGap(0);
 
+        F2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         F2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         F2.setIconTextGap(0);
 
+        E2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         E2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         E2.setIconTextGap(0);
 
+        F4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         F4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         F4.setIconTextGap(0);
 
+        E4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         E4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         E4.setIconTextGap(0);
 
+        F3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         F3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         F3.setIconTextGap(0);
 
+        F1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         F1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         F1.setIconTextGap(0);
 
+        E3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         E3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         E3.setIconTextGap(0);
 
+        E1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         E1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         E1.setIconTextGap(0);
 
+        G4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         G4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         G4.setIconTextGap(0);
 
+        G3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         G3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         G3.setIconTextGap(0);
 
+        G1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         G1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         G1.setIconTextGap(0);
 
+        G2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         G2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         G2.setIconTextGap(0);
 
+        H4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         H4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         H4.setIconTextGap(0);
 
+        H3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         H3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         H3.setIconTextGap(0);
 
+        H1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         H1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         H1.setIconTextGap(0);
 
+        H2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         H2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         H2.setIconTextGap(0);
 
+        I4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         I4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         I4.setIconTextGap(0);
 
+        I3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         I3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         I3.setIconTextGap(0);
 
+        I1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         I1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         I1.setIconTextGap(0);
 
+        I2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         I2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         I2.setIconTextGap(0);
 
+        J4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         J4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         J4.setIconTextGap(0);
 
+        J3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         J3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         J3.setIconTextGap(0);
 
+        J1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         J1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         J1.setIconTextGap(0);
 
+        J2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         J2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         J2.setIconTextGap(0);
 
+        B7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         B7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         B7.setIconTextGap(0);
 
+        A7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         A7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         A7.setIconTextGap(0);
 
+        B8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         B8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         B8.setIconTextGap(0);
 
+        A8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         A8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         A8.setIconTextGap(0);
 
+        B5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         B5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         B5.setIconTextGap(0);
 
+        A5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         A5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         A5.setIconTextGap(0);
 
+        B6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         B6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         B6.setIconTextGap(0);
 
+        A6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         A6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         A6.setIconTextGap(0);
 
+        C7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         C7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         C7.setIconTextGap(0);
 
+        C8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         C8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         C8.setIconTextGap(0);
 
+        C5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         C5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         C5.setIconTextGap(0);
 
+        C6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         C6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         C6.setIconTextGap(0);
 
+        D7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         D7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         D7.setIconTextGap(0);
 
+        D8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         D8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         D8.setIconTextGap(0);
 
+        D5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         D5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         D5.setIconTextGap(0);
 
+        D6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         D6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         D6.setIconTextGap(0);
 
+        G7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         G7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         G7.setIconTextGap(0);
 
+        G8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         G8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         G8.setIconTextGap(0);
 
+        G5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         G5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         G5.setIconTextGap(0);
 
+        G6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         G6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         G6.setIconTextGap(0);
 
+        H7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         H7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         H7.setIconTextGap(0);
 
+        H8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         H8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         H8.setIconTextGap(0);
 
+        H5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         H5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         H5.setIconTextGap(0);
 
+        H6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         H6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         H6.setIconTextGap(0);
 
+        F7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         F7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         F7.setIconTextGap(0);
 
+        E7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         E7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         E7.setIconTextGap(0);
 
+        F8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         F8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         F8.setIconTextGap(0);
 
+        E8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         E8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         E8.setIconTextGap(0);
 
+        F5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         F5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         F5.setIconTextGap(0);
 
+        E5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         E5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         E5.setIconTextGap(0);
 
+        F6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         F6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         F6.setIconTextGap(0);
 
+        E6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         E6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         E6.setIconTextGap(0);
 
+        I7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         I7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         I7.setIconTextGap(0);
 
+        I8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         I8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         I8.setIconTextGap(0);
 
+        I5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         I5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         I5.setIconTextGap(0);
 
+        I6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         I6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         I6.setIconTextGap(0);
 
+        J7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         J7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         J7.setIconTextGap(0);
 
+        J8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         J8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         J8.setIconTextGap(0);
 
+        J5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         J5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         J5.setIconTextGap(0);
 
+        J6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         J6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         J6.setIconTextGap(0);
 
@@ -778,7 +932,7 @@ public class Overworld extends javax.swing.JFrame implements KeyListener {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(A1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -928,12 +1082,12 @@ public class Overworld extends javax.swing.JFrame implements KeyListener {
                             .addComponent(J6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(J7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(J8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(188, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(J1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1104,7 +1258,7 @@ public class Overworld extends javax.swing.JFrame implements KeyListener {
                         .addComponent(J7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(J8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(188, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         A1.getAccessibleContext().setAccessibleName("");

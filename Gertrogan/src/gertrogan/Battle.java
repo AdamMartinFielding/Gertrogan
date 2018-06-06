@@ -15,9 +15,13 @@ import javax.swing.Timer;
 import java.awt.event.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+import java.io.*;
 
 public class Battle extends JPanel implements KeyListener {
-
+    
+    AudioStream audios;
     boolean pressed = false;
     Overworld overworld;
     int xPos = 100;
@@ -36,6 +40,15 @@ public class Battle extends JPanel implements KeyListener {
     BasicEnemy enemy = new BasicEnemy(enemyHealth, 10, 1, 1);
 
     public Battle(Overworld o) {
+        InputStream music;
+        try{
+            music = new FileInputStream(new File("src\\gertrogan\\Fight Music.wav"));
+            audios = new AudioStream(music);
+            AudioPlayer.player.start(audios);
+        }catch(IOException e){
+            System.out.println("Error: " + e);
+        }
+        
         this.setBackground(Color.GRAY);
         overworld = o;
         ActionListener al = new ActionListener() {
@@ -140,6 +153,8 @@ public class Battle extends JPanel implements KeyListener {
 
             this.setVisible(
                     false);
+            AudioPlayer.player.stop(audios);
+            overworld.startMusic();
           
         } else {
             if (hurt > 0) {

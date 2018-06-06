@@ -5,16 +5,19 @@
  */
 package gertrogan;
 
-/**
- *
- * @author Evan
- */
+import javax.swing.ImageIcon;
 public class Protagonist extends AbstractCharacter {
     
     String name;
     
     public Protagonist(String name,int health, int attack, int col, int row){
         super(health, attack, col, row);
+        this.name = name;
+        
+    }
+    
+    public Protagonist(ImageIcon image,String name,int health, int attack, int col, int row){
+        super(image,health, attack, col, row);
         this.name = name;
         
     }
