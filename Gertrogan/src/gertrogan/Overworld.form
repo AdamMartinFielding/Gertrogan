@@ -465,9 +465,6 @@
         </Property>
         <Property name="iconTextGap" type="int" value="0"/>
       </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
-      </AccessibilityProperties>
     </Component>
     <Component class="javax.swing.JLabel" name="B2">
       <Properties>
