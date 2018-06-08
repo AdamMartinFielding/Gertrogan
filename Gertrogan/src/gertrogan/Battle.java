@@ -15,45 +15,53 @@ import java.awt.Image;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import java.awt.event.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
 import java.io.*;
+import javax.sound.sampled.*;
 import javax.swing.ImageIcon;
 
 public class Battle extends JPanel implements KeyListener {
 
-    AudioStream audios;
-    boolean pressed = false;
+    private Clip clip;
+    private boolean pressed = false;
     Overworld overworld;
-    int xPos = 100;
-    int xSpeed = 20;
-    boolean first = true;
-    int enemyAttack;
-    int rand;
-    int damage;
-    int health;
-    int enemyHealth;
-    int hurt;
-    int hurt2;
-    String message = "";
-    String eMessage = "";
-    boolean pushed;
-    int enemyHitDetector;
+    BattleS battleS;
+    private int xPos = 100;
+    private int xSpeed = 20;
+    private boolean first = true;
+    private int enemyAttack;
+    private int rand;
+    private int damage;
+    private int health;
+    private int enemyHealth;
+    private int hurt;
+    private int hurt2;
+    private String message = "";
+    private String eMessage = "";
+    private boolean pushed;
+    private int enemyHitDetector;
     private Image player = new ImageIcon("src//gertrogan//gertrude.png").getImage();
-    public Battle(Overworld o) {
+    public Battle(Overworld o, BattleS battleS) {
 
-        InputStream music;
         try {
-            music = new FileInputStream(new File("src//gertrogan//Fight Music.wav"));
-            audios = new AudioStream(music);
-            AudioPlayer.player.start(audios);
-        } catch (IOException e) {
-            System.out.println("Error: " + e);
-        }
+         // Open an audio input stream.
+            File soundFile = new File("src\\gertrogan\\Fight Music.wav");
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
+         // Get a sound clip resource.
+            clip = AudioSystem.getClip();
+         // Open audio clip and load samples from the audio input stream.
+            clip.open(audioIn);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+      } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+      } catch (IOException e) {
+            e.printStackTrace();
+      } catch (LineUnavailableException e) {
+            e.printStackTrace();
+      }
+        
         this.setBackground(Color.DARK_GRAY);
         overworld = o;
+        this.battleS = battleS;
         health = overworld.gertrude.getHealth();
         enemyHealth = overworld.gromlin.getHealth();
         System.out.println(enemyHealth);
@@ -171,11 +179,12 @@ public class Battle extends JPanel implements KeyListener {
         g2d.fillRoundRect(500, 125, enemyHealth * 2, 25, 20, 20);//enemy health
         overworld.gromlin.setHealth(enemyHealth);
         if (overworld.gromlin.getHealth() <= 0) {
-
+            overworld.updateCharacterLocation(overworld.gromlin, 0, 0);
+            overworld.updateCharacterLocation(overworld.gertrude, overworld.gertrude.getCol(), overworld.gertrude.getRow());
             overworld.setVisible(true);
-
+            battleS.setVisible(false);
             this.setVisible(false);
-            AudioPlayer.player.stop(audios);
+            if (clip.isRunning()) clip.stop();
             overworld.startMusic();
 
         } else {
