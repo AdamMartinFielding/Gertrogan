@@ -1,6 +1,7 @@
 /*
 Evan Hansen
 05/25/18
+An Abstract Character class
  */
 package gertrogan;
 

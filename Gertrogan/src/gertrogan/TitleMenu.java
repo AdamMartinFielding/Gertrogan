@@ -6,12 +6,16 @@
 package gertrogan;
 
 import java.awt.event.*;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
+import sun.audio.AudioPlayer; //replace
+import sun.audio.AudioStream; //replace
 import java.io.*;
+
 public class TitleMenu extends javax.swing.JFrame implements KeyListener {
+
+    private Death death;
     private Overworld overworld;
-    AudioStream audios;
+    AudioStream audios; //replace
+
     /**
      * Creates new form TitleMenu
      */
@@ -20,33 +24,41 @@ public class TitleMenu extends javax.swing.JFrame implements KeyListener {
         setFocusable(true);
         this.addKeyListener(this);
         InputStream music;
-        try{
-            music = new FileInputStream(new File("src\\gertrogan\\Menu Music.wav"));
-            audios = new AudioStream(music);
+        try {
+            music = new FileInputStream(new File("src\\gertrogan\\Menu Music.wav")); //replace
+            audios = new AudioStream(music); //replace 
             AudioPlayer.player.start(audios);
-            
-        }catch(IOException e){
+
+        } catch (IOException e) {
             System.out.println("Error: " + e);
         }
     }
-    
-    public void keyTyped(KeyEvent e){
+
+    public void keyTyped(KeyEvent e) {
         //not needed
     }
-    
-    
-    public void keyPressed(KeyEvent e){
-        if(overworld == null){
-            overworld = new Overworld(this);
+
+    public void keyPressed(KeyEvent e) {
+        int keyCode = e.getKeyCode();
+
+        if (keyCode == KeyEvent.VK_M) {
+            death = new Death();
+            death.setVisible(true);
+            this.setVisible(false);
+            AudioPlayer.player.stop(audios);
+        } else {
+            if (overworld == null) {
+                overworld = new Overworld(this);
+            }
+            overworld.setVisible(true);
+
+            this.setVisible(false);
+            AudioPlayer.player.stop(audios);
         }
-        overworld.setVisible(true);
-        
-        this.setVisible(false);
-        AudioPlayer.player.stop(audios);
-        
+
     }
-    
-    public void keyReleased(KeyEvent e){
+
+    public void keyReleased(KeyEvent e) {
         //not needed
     }
 
@@ -63,19 +75,14 @@ public class TitleMenu extends javax.swing.JFrame implements KeyListener {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setForeground(new java.awt.Color(0, 0, 0));
+        setMaximumSize(new java.awt.Dimension(800, 800));
+        setMinimumSize(new java.awt.Dimension(800, 800));
+        setResizable(false);
+        getContentPane().setLayout(null);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/gertrogran title.png"))); // NOI18N
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/gertrogran title better.png"))); // NOI18N
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(0, 0, 800, 800);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

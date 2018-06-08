@@ -11,30 +11,27 @@ public class BasicEnemy extends AbstractCharacter {
 
     //To do list
     //
+
     
 private int attackPow;
 
 
-    public BasicEnemy(int health, int attack, int col, int row){
+    public BasicEnemy(int health, int attack, int col, int row) {
         super(health, attack, col, row);
-        
 
     }
-    
-    public BasicEnemy(ImageIcon image,int health, int attack, int col, int row){
-        super(image,health, attack, col, row);
-        
+
+    public BasicEnemy(ImageIcon image, int health, int attack, int col, int row) {
+        super(image, health, attack, col, row);
 
     }
-    
-    
-    
-    
-    public int doDamage(){
-        
+
+    public int doDamage() {
+
         int attackRoll = (int) (Math.random() * 100 + 1);
         int multiplier = 0;
         if (attackRoll <= 10) {
+
              multiplier = 0;
         } else if (attackRoll > 10 && attackRoll < 90){
              multiplier = 1;
@@ -43,6 +40,7 @@ private int attackPow;
         }
         return multiplier;
         
+
     }
 
     public int getHealth() {
@@ -52,6 +50,5 @@ private int attackPow;
     public void setHealth(int health) {
         this.health = health;
     }
-    
-   
+
 }
