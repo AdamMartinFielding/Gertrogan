@@ -6,16 +6,15 @@
 package gertrogan;
 
 import java.awt.event.*;
-import sun.audio.AudioPlayer; //replace
-import sun.audio.AudioStream; //replace
+
 import java.io.*;
+import javax.sound.sampled.*;
 
 public class TitleMenu extends javax.swing.JFrame implements KeyListener {
 
     private Death death;
     private Overworld overworld;
-    AudioStream audios; //replace
-
+    private Clip clip;
     /**
      * Creates new form TitleMenu
      */
@@ -23,15 +22,24 @@ public class TitleMenu extends javax.swing.JFrame implements KeyListener {
         initComponents();
         setFocusable(true);
         this.addKeyListener(this);
-        InputStream music;
+        
         try {
-            music = new FileInputStream(new File("src\\gertrogan\\Menu Music.wav")); //replace
-            audios = new AudioStream(music); //replace 
-            AudioPlayer.player.start(audios);
-
-        } catch (IOException e) {
-            System.out.println("Error: " + e);
-        }
+         // Open an audio input stream.
+            File soundFile = new File("src\\gertrogan\\Menu Music.wav");
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
+         // Get a sound clip resource.
+            clip = AudioSystem.getClip();
+         // Open audio clip and load samples from the audio input stream.
+            clip.open(audioIn);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+      } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+      } catch (IOException e) {
+            e.printStackTrace();
+      } catch (LineUnavailableException e) {
+            e.printStackTrace();
+      }
+        
     }
 
     public void keyTyped(KeyEvent e) {
@@ -44,18 +52,19 @@ public class TitleMenu extends javax.swing.JFrame implements KeyListener {
         if (keyCode == KeyEvent.VK_M) {
             death = new Death();
             death.setVisible(true);
-            this.setVisible(false);
-            AudioPlayer.player.stop(audios);
+
+
         } else {
-            if (overworld == null) {
-                overworld = new Overworld(this);
-            }
+            
+            overworld = new Overworld();
+            
             overworld.setVisible(true);
 
-            this.setVisible(false);
-            AudioPlayer.player.stop(audios);
-        }
+            
 
+        }
+        if (clip.isRunning()) clip.stop();
+        this.setVisible(false);
     }
 
     public void keyReleased(KeyEvent e) {
@@ -75,7 +84,6 @@ public class TitleMenu extends javax.swing.JFrame implements KeyListener {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setForeground(new java.awt.Color(0, 0, 0));
-        setMaximumSize(new java.awt.Dimension(800, 800));
         setMinimumSize(new java.awt.Dimension(800, 800));
         setResizable(false);
         getContentPane().setLayout(null);

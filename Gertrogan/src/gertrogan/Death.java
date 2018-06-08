@@ -10,14 +10,8 @@ It will also play music to enhance the feeling of their passing
 package gertrogan;
 
 import java.awt.event.*;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.DataLine;
-import java.applet.Applet;
-import java.applet.AudioClip;
-import java.io.FileInputStream;
-import java.io.IOException;
-import sun.audio.*;
+import java.io.*;
+import javax.sound.sampled.*;
 
 
 /*
@@ -27,14 +21,30 @@ To-do
 >Save player's progress to a data file...
  */
 public class Death extends javax.swing.JFrame implements KeyListener {
-
+    private Clip clip;
     private TitleMenu titleMenu;
 
     public Death() {
         initComponents();
         setFocusable(true);
         this.addKeyListener(this);
-
+        
+        try {
+         // Open an audio input stream.
+            File soundFile = new File("src\\gertrogan\\Death Music.wav");
+            AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
+         // Get a sound clip resource.
+            clip = AudioSystem.getClip();
+         // Open audio clip and load samples from the audio input stream.
+            clip.open(audioIn);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+      } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+      } catch (IOException e) {
+            e.printStackTrace();
+      } catch (LineUnavailableException e) {
+            e.printStackTrace();
+      }
     }
 //---------------------------------------------------------------------------------------------
 
@@ -78,29 +88,14 @@ public class Death extends javax.swing.JFrame implements KeyListener {
 //----------------------------------------------------------------------------------------------
 
     //no work need fix
-    public static void playMusic() throws Exception {
-		AudioPlayer MGP = AudioPlayer.player;
-		AudioStream BGM;
-		AudioData MD;
-		ContinuousAudioDataStream loop = null;
-		try{
-			BGM = new AudioStream(new FileInputStream("src\\gertrogan\\Death Music.wav"));
-			MD = BGM.getData();
-			loop = new ContinuousAudioDataStream(MD);
-		}catch(IOException error){
-			System.out.print("file not found");
-		}
-		
-		MGP.start(loop);
-	}
+    
 
     public void keyPressed(KeyEvent e) {
-        if (titleMenu == null) {
-            titleMenu = new TitleMenu();
-        }
+        
+        titleMenu = new TitleMenu();
         titleMenu.setVisible(true);
         this.setVisible(false);
-
+        if (clip.isRunning()) clip.stop();
     }
 
     public void keyTyped(KeyEvent e) {
@@ -114,40 +109,7 @@ public class Death extends javax.swing.JFrame implements KeyListener {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) throws Exception {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Death.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Death.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Death.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Death.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Death().setVisible(true);
-            }
-        });
-
-        playMusic();
-    }
+    
     
     
 
