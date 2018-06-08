@@ -18,12 +18,16 @@ public class Overworld extends javax.swing.JFrame implements KeyListener {
     TitleMenu titleMenu;
     BattleS battles;
 
+
     private ImageIcon protagonist = new ImageIcon("src\\gertrogan\\tileGertrude.png");
     private ImageIcon tile = new ImageIcon("src\\gertrogan\\tileDefault.png");
     private ImageIcon gromlinTile = new ImageIcon("src\\gertrogan\\tileGromlin.png");
     public Protagonist gertrude = new Protagonist(protagonist, "gertrude", 100, 10, 1, 4);
     public BasicEnemy gromlin = new BasicEnemy(gromlinTile, 100, 10, 9, 2);
 
+
+    
+ 
     public Overworld(TitleMenu m) {
         titleMenu = m;
         initComponents();
@@ -32,8 +36,10 @@ public class Overworld extends javax.swing.JFrame implements KeyListener {
         updateCharacterLocation(gertrude, gertrude.getCol(), gertrude.getRow());
         updateCharacterLocation(gromlin, gromlin.getCol(), gromlin.getRow());
         InputStream music;
+
         try {
             music = new FileInputStream(new File("src\\gertrogan\\Overworld Music.wav"));
+
             audios = new AudioStream(music);
             AudioPlayer.player.start(audios);
 
@@ -44,8 +50,10 @@ public class Overworld extends javax.swing.JFrame implements KeyListener {
 
     public void startMusic() {
         InputStream music;
+
         try {
             music = new FileInputStream(new File("src\\gertrogan\\Overworld Music.wav"));
+
             audios = new AudioStream(music);
             AudioPlayer.player.start(audios);
 
