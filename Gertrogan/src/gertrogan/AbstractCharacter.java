@@ -13,12 +13,14 @@ abstract public class AbstractCharacter implements Character {
     int row;
     int attack;
     int health;
+    int maxHealth;
     boolean alive;
 
     public AbstractCharacter(int health, int attack, int col, int row) {
         this.col = col;
         this.row = row;
         this.attack = attack;
+        this.maxHealth = health;
         this.health = health;
         alive = true;
     }
@@ -28,12 +30,17 @@ abstract public class AbstractCharacter implements Character {
         this.row = row;
         this.attack = attack;
         this.health = health;
+        this.maxHealth = health;
         this.image = image;
         alive = true;
     }
-
+    
    public ImageIcon getImage(){
         return image;
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
     }
    
     public int getCol() {
@@ -56,7 +63,7 @@ abstract public class AbstractCharacter implements Character {
         return attack;
     }
 
-    public void setAttack(int Attack) {
+    public void setAttack(int attack) {
         this.attack = attack;
     }
 
@@ -64,7 +71,7 @@ abstract public class AbstractCharacter implements Character {
         return health;
     }
 
-    public void setHealth(int Health) {
+    public void setHealth(int health) {
         this.health = health;
     }
 

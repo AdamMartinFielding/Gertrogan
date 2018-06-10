@@ -31,7 +31,7 @@ public class Death extends javax.swing.JFrame implements KeyListener {
         
         try {
          // Open an audio input stream.
-            File soundFile = new File("src\\gertrogan\\Death Music.wav");
+            File soundFile = new File("src//gertrogan//Death Music.wav");
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
          // Get a sound clip resource.
             clip = AudioSystem.getClip();

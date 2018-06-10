@@ -16,9 +16,9 @@ public class Overworld extends javax.swing.JFrame implements KeyListener {
     BattleS battles;
 
     private Clip clip;
-    private ImageIcon protagonist = new ImageIcon("src\\gertrogan\\tileGertrude.png");
-    private ImageIcon tile = new ImageIcon("src\\gertrogan\\tileDefault.png");
-    private ImageIcon gromlinTile = new ImageIcon("src\\gertrogan\\tileGromlin.png");
+    private ImageIcon protagonist = new ImageIcon("src//gertrogan//tileGertrude.png");
+    private ImageIcon tile = new ImageIcon("src//gertrogan//tileDefault.png");
+    private ImageIcon gromlinTile = new ImageIcon("src//gertrogan//tileGromlin.png");
     public Protagonist gertrude = new Protagonist(protagonist, "gertrude", 100, 10, 1, 4);
     public BasicEnemy gromlin = new BasicEnemy(gromlinTile, 100, 10, 9, 2);
 
@@ -37,7 +37,7 @@ public class Overworld extends javax.swing.JFrame implements KeyListener {
     public void startMusic() {
         try {
          // Open an audio input stream.
-            File soundFile = new File("src\\gertrogan\\Overworld Music.wav");
+            File soundFile = new File("src//gertrogan//Overworld Music.wav");
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
          // Get a sound clip resource.
             clip = AudioSystem.getClip();
@@ -610,7 +610,6 @@ public class Overworld extends javax.swing.JFrame implements KeyListener {
         setMaximumSize(new java.awt.Dimension(800, 800));
         setMinimumSize(new java.awt.Dimension(800, 800));
         setName("Gertrogan Overworld"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(800, 800));
         setResizable(false);
 
         B1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
