@@ -25,6 +25,7 @@ public class Battle extends JPanel implements KeyListener {
     private boolean pressed = false;
     Overworld overworld;
     BattleS battleS;
+    Death death;
     private int xPos = 100;
     private int xSpeed = 20;
     private boolean first = true;
@@ -40,31 +41,33 @@ public class Battle extends JPanel implements KeyListener {
     private boolean pushed;
     private int enemyHitDetector;
     private Image player = new ImageIcon("src//gertrogan//gertrude.png").getImage();
+    private int playerHealthPer;
+    private int enemyHealthPer;
+
     public Battle(Overworld o, BattleS battleS) {
 
         try {
-         // Open an audio input stream.
-            File soundFile = new File("src\\gertrogan\\Fight Music.wav");
+            // Open an audio input stream.
+            File soundFile = new File("src//gertrogan//Fight Music.wav");
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
-         // Get a sound clip resource.
+            // Get a sound clip resource.
             clip = AudioSystem.getClip();
-         // Open audio clip and load samples from the audio input stream.
+            // Open audio clip and load samples from the audio input stream.
             clip.open(audioIn);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
-      } catch (UnsupportedAudioFileException e) {
+        } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
-      } catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
-      } catch (LineUnavailableException e) {
+        } catch (LineUnavailableException e) {
             e.printStackTrace();
-      }
-        
+        }
+
         this.setBackground(Color.DARK_GRAY);
         overworld = o;
         this.battleS = battleS;
         health = overworld.gertrude.getHealth();
         enemyHealth = overworld.gromlin.getHealth();
-        System.out.println(enemyHealth);
         ActionListener al = new ActionListener() {
             //when the timer ticks
             @Override
@@ -116,12 +119,12 @@ public class Battle extends JPanel implements KeyListener {
         } else if (keyCode == KeyEvent.VK_SPACE && xSpeed == 0) {
             pushed = false;
             enemyHitDetector = overworld.gromlin.doDamage();
-            enemyAttack = (overworld.gromlin.getAttack())*(enemyHitDetector);
+            enemyAttack = (overworld.gromlin.getAttack()) * (enemyHitDetector);
             if (enemyHitDetector == 0) {
                 eMessage = "ENEMY MISSED! " + enemyAttack + " DAMAGE";
-            }else if(enemyHitDetector == 1){
+            } else if (enemyHitDetector == 1) {
                 eMessage = "ENEMY HIT " + enemyAttack + " DAMAGE";
-            }else{
+            } else {
                 eMessage = "ENEMY CRIT " + enemyAttack + " DAMAGE";
             }
             hurt = enemyAttack;
@@ -141,20 +144,20 @@ public class Battle extends JPanel implements KeyListener {
     private void doDrawing(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(player, 170, 200, null);
-        
+
         g2d.setFont(new Font("Courier", Font.BOLD, 18));
         g2d.setColor(Color.black);
         g2d.fillRect(50, 650, 700, 50);
         g2d.fillRect(500, 400, 300, 200);
-         g2d.setColor(Color.WHITE);
+        g2d.setColor(Color.WHITE);
         if (pushed == true) {
             g2d.drawString(message, 525, 500);
             g2d.drawString("(press space to continue)", 515, 550);
         }
-        if(pushed == false){
-        g2d.drawString(eMessage, 525, 500);
-        }     
-        
+        if (pushed == false) {
+            g2d.drawString(eMessage, 525, 500);
+        }
+
         //will only randomize once so when the drawing is redone it is not rerandomized 
         if (first == true) {
             rand = (int) (Math.random() * 300) + 50;
@@ -172,19 +175,33 @@ public class Battle extends JPanel implements KeyListener {
         g2d.setColor(Color.black);//draw health bar background(enemy)
         g2d.fillRoundRect(500, 125, 200, 25, 20, 20);
         g2d.setColor(Color.red);
-        if (hurt2 > 0) {
-            enemyHealth -= 1;
-            hurt2 -= 1;
+        if (overworld.gertrude.getHealth() <= 0) {
+             death = new Death();
+            death.setVisible(true);
+            battleS.setVisible(false);
+            this.setVisible(false);
+            if (clip.isRunning()) {
+                clip.stop();
+            }
+        } else {
+            if (hurt2 > 0) {
+                enemyHealth -= 1;
+                hurt2 -= 1;
+            }
         }
-        g2d.fillRoundRect(500, 125, enemyHealth * 2, 25, 20, 20);//enemy health
         overworld.gromlin.setHealth(enemyHealth);
+        enemyHealthPer = (int) (((double) overworld.gromlin.getHealth() / (double) overworld.gromlin.getMaxHealth()) * 100);
+        g2d.fillRoundRect(500, 125, enemyHealthPer * 2, 25, 20, 20);//enemy health
+
         if (overworld.gromlin.getHealth() <= 0) {
             overworld.updateCharacterLocation(overworld.gromlin, 0, 0);
             overworld.updateCharacterLocation(overworld.gertrude, overworld.gertrude.getCol(), overworld.gertrude.getRow());
             overworld.setVisible(true);
             battleS.setVisible(false);
             this.setVisible(false);
-            if (clip.isRunning()) clip.stop();
+            if (clip.isRunning()) {
+                clip.stop();
+            }
             overworld.startMusic();
 
         } else {
@@ -194,8 +211,9 @@ public class Battle extends JPanel implements KeyListener {
             }
             overworld.gertrude.setHealth(health);
         }
-        g2d.fillRoundRect(100, 125, health * 2, 25, 20, 20); //Player health
-        
+        playerHealthPer = (int) (((double) overworld.gertrude.getHealth() / (double) overworld.gertrude.getMaxHealth()) * 100);
+        g2d.fillRoundRect(100, 125, playerHealthPer * 2, 25, 20, 20); //Player health
+
     }
 
     @Override

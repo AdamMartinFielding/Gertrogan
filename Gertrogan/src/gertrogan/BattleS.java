@@ -20,7 +20,7 @@ Overworld overworld;
     private void initUI() {
         
         //set title of the JFrame
-        setTitle("Simple Java 2D example");
+        setTitle("BATTLE");
         //add a custom JPanel to draw on
         add(new Battle(overworld, this));
         //set the size of the window
