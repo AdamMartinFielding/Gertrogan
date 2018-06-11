@@ -6,6 +6,7 @@ Implements sound and graphics
  */
 package gertrogan;
 
+
 import java.awt.event.*;
 import javax.swing.*;
 import java.io.*;
@@ -16,28 +17,101 @@ public class Overworld extends javax.swing.JFrame implements KeyListener {
     BattleS battles;
 
     private Clip clip;
-    private ImageIcon protagonist = new ImageIcon("src//gertrogan//tileGertrude.png");
-    private ImageIcon tile = new ImageIcon("src//gertrogan//tileDefault.png");
-    private ImageIcon gromlinTile = new ImageIcon("src//gertrogan//tileGromlin.png");
-    public Protagonist gertrude = new Protagonist(protagonist, "gertrude", 100, 10, 1, 4);
-    public BasicEnemy gromlin = new BasicEnemy(gromlinTile, 100, 10, 9, 2);
-
-
+    private ImageIcon protagonistTile = new ImageIcon("src\\gertrogan\\tileGertrude.png");;
+    private ImageIcon tile = new ImageIcon("src\\gertrogan\\tileDefault.png");
+    private ImageIcon gromlinTile = new ImageIcon("src\\gertrogan\\tileGromlin.png");
+    private ImageIcon BengurtleTile = new ImageIcon("src\\gertrogan\\tileBengurtle.png");
+    private ImageIcon DajingTile = new ImageIcon("src\\gertrogan\\tileDajing.png");
+    
+    private ImageIcon protagonist = new ImageIcon("src\\gertrogan\\gertrude.png");
+    private ImageIcon gromlin = new ImageIcon("src\\gertrogan\\gromlin.png");
+    private ImageIcon Bengurtle = new ImageIcon("src\\gertrogan\\Grogurt big.png");
+    private ImageIcon Dajing = new ImageIcon("src\\gertrogan\\Dajing.png");
+    public Protagonist gertrude = new Protagonist(protagonistTile, protagonist, "gertrude", 100, 10, 1, 5);
+    public BasicEnemy enemy1 = new BasicEnemy(gromlinTile, gromlin, 100, 10, 9, 2);
+    public BasicEnemy enemy2 = new BasicEnemy(gromlinTile, gromlin, 0, 10, 9, 2);
+    public BasicEnemy enemy3 = new BasicEnemy(gromlinTile, gromlin, 0, 10, 9, 2);
+    
+    public int enemiesKilled;
+    
+    private boolean enemy1Battle = false;
+    private boolean enemy2Battle = false;
+    public boolean enemy3Battle = false;
+    
+    private boolean area1Active;
+    private boolean area2Active;
+    private boolean area3Active;
+    
+    public int stage = 0;
+    private int area = 1;
+    
+    
     
  
     public Overworld() {
         initComponents();
         setFocusable(true);
         this.addKeyListener(this);
-        updateCharacterLocation(gertrude, gertrude.getCol(), gertrude.getRow());
-        updateCharacterLocation(gromlin, gromlin.getCol(), gromlin.getRow());
+        setArea1();
         startMusic();
     }
+    
+    public void setArea1(){
+        area1Active = true;
+        area3Active = false;
+        stage++;
+        area = 1;
+        lblPath.setText("");
+        lblStage.setText("Stage: " + stage);
+        lblArea.setText("Area: " + area);
+        
+        gertrude.setCol(1);
+        gertrude.setRow(5);
+        
+        enemy1 = new BasicEnemy(gromlinTile, gromlin, 100, 10, 9, 2);
+        
+
+        
+        updateCharacterLocation(gertrude, gertrude.getCol(), gertrude.getRow());
+        updateCharacterLocation(enemy1, enemy1.getCol(), enemy1.getRow());
+    }
+    
+    public void setArea2(){
+        area1Active = false;
+        area2Active = true;
+        area = 2;
+        gertrude.setCol(1);
+        gertrude.setRow(5);
+        
+        lblPath.setText("");
+        
+        enemy1 = new BasicEnemy(gromlinTile, gromlin, 100, 10, 9, 2);
+        enemy2 = new BasicEnemy(DajingTile, Dajing, 110, 10, 6, 6);
+        updateCharacterLocation(enemy1, enemy1.getCol(), enemy1.getRow());
+        updateCharacterLocation(enemy2, enemy2.getCol(), enemy2.getRow());
+        updateCharacterLocation(gertrude, gertrude.getCol(), gertrude.getRow());
+    }
+    
+    public void setArea3(){
+        area2Active = false;
+        area3Active = true;
+        area = 3;
+        gertrude.setCol(1);
+        gertrude.setRow(5);
+        
+        lblPath.setText("");
+        
+        enemy3 = new BasicEnemy(BengurtleTile, Bengurtle, 200, 15, 10, 5);
+        updateCharacterLocation(enemy3, enemy3.getCol(), enemy3.getRow());
+        updateCharacterLocation(gertrude, gertrude.getCol(), gertrude.getRow());
+    }
+    
+    
 
     public void startMusic() {
         try {
          // Open an audio input stream.
-            File soundFile = new File("src//gertrogan//Overworld Music.wav");
+            File soundFile = new File("src\\gertrogan\\Overworld Music.wav");
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
          // Get a sound clip resource.
             clip = AudioSystem.getClip();
@@ -241,185 +315,186 @@ public class Overworld extends javax.swing.JFrame implements KeyListener {
 
         col = newCol;
         row = newRow;
+        ImageIcon charTile = character.getTile();
         if (col == 1) {
             if (row == 1) {
-                A1.setIcon(character.getImage());
+                A1.setIcon(charTile);
             } else if (row == 2) {
-                A2.setIcon(character.getImage());
+                A2.setIcon(charTile);
             } else if (row == 3) {
-                A3.setIcon(character.getImage());
+                A3.setIcon(charTile);
             } else if (row == 4) {
-                A4.setIcon(character.getImage());
+                A4.setIcon(charTile);
             } else if (row == 5) {
-                A5.setIcon(character.getImage());
+                A5.setIcon(charTile);
             } else if (row == 6) {
-                A6.setIcon(character.getImage());
+                A6.setIcon(charTile);
             } else if (row == 7) {
-                A7.setIcon(character.getImage());
+                A7.setIcon(charTile);
             } else if (row == 8) {
-                A8.setIcon(character.getImage());
+                A8.setIcon(charTile);
             }
         } else if (col == 2) {
             if (row == 1) {
-                B1.setIcon(character.getImage());
+                B1.setIcon(charTile);
             } else if (row == 2) {
-                B2.setIcon(character.getImage());
+                B2.setIcon(charTile);
             } else if (row == 3) {
-                B3.setIcon(character.getImage());
+                B3.setIcon(charTile);
             } else if (row == 4) {
-                B4.setIcon(character.getImage());
+                B4.setIcon(charTile);
             } else if (row == 5) {
-                B5.setIcon(character.getImage());
+                B5.setIcon(charTile);
             } else if (row == 6) {
-                B6.setIcon(character.getImage());
+                B6.setIcon(charTile);
             } else if (row == 7) {
-                B7.setIcon(character.getImage());
+                B7.setIcon(charTile);
             } else if (row == 8) {
-                B8.setIcon(character.getImage());
+                B8.setIcon(charTile);
             }
         } else if (col == 3) {
             if (row == 1) {
-                C1.setIcon(character.getImage());
+                C1.setIcon(charTile);
             } else if (row == 2) {
-                C2.setIcon(character.getImage());
+                C2.setIcon(charTile);
             } else if (row == 3) {
-                C3.setIcon(character.getImage());
+                C3.setIcon(charTile);
             } else if (row == 4) {
-                C4.setIcon(character.getImage());
+                C4.setIcon(charTile);
             } else if (row == 5) {
-                C5.setIcon(character.getImage());
+                C5.setIcon(charTile);
             } else if (row == 6) {
-                C6.setIcon(character.getImage());
+                C6.setIcon(charTile);
             } else if (row == 7) {
-                C7.setIcon(character.getImage());
+                C7.setIcon(charTile);
             } else if (row == 8) {
-                C8.setIcon(character.getImage());
+                C8.setIcon(charTile);
             }
         } else if (col == 4) {
             if (row == 1) {
-                D1.setIcon(character.getImage());
+                D1.setIcon(charTile);
             } else if (row == 2) {
-                D2.setIcon(character.getImage());
+                D2.setIcon(charTile);
             } else if (row == 3) {
-                D3.setIcon(character.getImage());
+                D3.setIcon(charTile);
             } else if (row == 4) {
-                D4.setIcon(character.getImage());
+                D4.setIcon(charTile);
             } else if (row == 5) {
-                D5.setIcon(character.getImage());
+                D5.setIcon(charTile);
             } else if (row == 6) {
-                D6.setIcon(character.getImage());
+                D6.setIcon(charTile);
             } else if (row == 7) {
-                D7.setIcon(character.getImage());
+                D7.setIcon(charTile);
             } else if (row == 8) {
-                D8.setIcon(character.getImage());
+                D8.setIcon(charTile);
             }
         } else if (col == 5) {
             if (row == 1) {
-                E1.setIcon(character.getImage());
+                E1.setIcon(charTile);
             } else if (row == 2) {
-                E2.setIcon(character.getImage());
+                E2.setIcon(charTile);
             } else if (row == 3) {
-                E3.setIcon(character.getImage());
+                E3.setIcon(charTile);
             } else if (row == 4) {
-                E4.setIcon(character.getImage());
+                E4.setIcon(charTile);
             } else if (row == 5) {
-                E5.setIcon(character.getImage());
+                E5.setIcon(charTile);
             } else if (row == 6) {
-                E6.setIcon(character.getImage());
+                E6.setIcon(charTile);
             } else if (row == 7) {
-                E7.setIcon(character.getImage());
+                E7.setIcon(charTile);
             } else if (row == 8) {
-                E8.setIcon(character.getImage());
+                E8.setIcon(charTile);
             }
         } else if (col == 6) {
             if (row == 1) {
-                F1.setIcon(character.getImage());
+                F1.setIcon(charTile);
             } else if (row == 2) {
-                F2.setIcon(character.getImage());
+                F2.setIcon(charTile);
             } else if (row == 3) {
-                F3.setIcon(character.getImage());
+                F3.setIcon(charTile);
             } else if (row == 4) {
-                F4.setIcon(character.getImage());
+                F4.setIcon(charTile);
             } else if (row == 5) {
-                F5.setIcon(character.getImage());
+                F5.setIcon(charTile);
             } else if (row == 6) {
-                F6.setIcon(character.getImage());
+                F6.setIcon(charTile);
             } else if (row == 7) {
-                F7.setIcon(character.getImage());
+                F7.setIcon(charTile);
             } else if (row == 8) {
-                F8.setIcon(character.getImage());
+                F8.setIcon(charTile);
             }
         } else if (col == 7) {
             if (row == 1) {
-                G1.setIcon(character.getImage());
+                G1.setIcon(charTile);
             } else if (row == 2) {
-                G2.setIcon(character.getImage());
+                G2.setIcon(charTile);
             } else if (row == 3) {
-                G3.setIcon(character.getImage());
+                G3.setIcon(charTile);
             } else if (row == 4) {
-                G4.setIcon(character.getImage());
+                G4.setIcon(charTile);
             } else if (row == 5) {
-                G5.setIcon(character.getImage());
+                G5.setIcon(charTile);
             } else if (row == 6) {
-                G6.setIcon(character.getImage());
+                G6.setIcon(charTile);
             } else if (row == 7) {
-                G7.setIcon(character.getImage());
+                G7.setIcon(charTile);
             } else if (row == 8) {
-                G8.setIcon(character.getImage());
+                G8.setIcon(charTile);
             }
         } else if (col == 8) {
             if (row == 1) {
-                H1.setIcon(character.getImage());
+                H1.setIcon(charTile);
             } else if (row == 2) {
-                H2.setIcon(character.getImage());
+                H2.setIcon(charTile);
             } else if (row == 3) {
-                H3.setIcon(character.getImage());
+                H3.setIcon(charTile);
             } else if (row == 4) {
-                H4.setIcon(character.getImage());
+                H4.setIcon(charTile);
             } else if (row == 5) {
-                H5.setIcon(character.getImage());
+                H5.setIcon(charTile);
             } else if (row == 6) {
-                H6.setIcon(character.getImage());
+                H6.setIcon(charTile);
             } else if (row == 7) {
-                H7.setIcon(character.getImage());
+                H7.setIcon(charTile);
             } else if (row == 8) {
-                H8.setIcon(character.getImage());
+                H8.setIcon(charTile);
             }
         } else if (col == 9) {
             if (row == 1) {
-                I1.setIcon(character.getImage());
+                I1.setIcon(charTile);
             } else if (row == 2) {
-                I2.setIcon(character.getImage());
+                I2.setIcon(charTile);
             } else if (row == 3) {
-                I3.setIcon(character.getImage());
+                I3.setIcon(charTile);
             } else if (row == 4) {
-                I4.setIcon(character.getImage());
+                I4.setIcon(charTile);
             } else if (row == 5) {
-                I5.setIcon(character.getImage());
+                I5.setIcon(charTile);
             } else if (row == 6) {
-                I6.setIcon(character.getImage());
+                I6.setIcon(charTile);
             } else if (row == 7) {
-                I7.setIcon(character.getImage());
+                I7.setIcon(charTile);
             } else if (row == 8) {
-                I8.setIcon(character.getImage());
+                I8.setIcon(charTile);
             }
         } else if (col == 10) {
             if (row == 1) {
-                J1.setIcon(character.getImage());
+                J1.setIcon(charTile);
             } else if (row == 2) {
-                J2.setIcon(character.getImage());
+                J2.setIcon(charTile);
             } else if (row == 3) {
-                J3.setIcon(character.getImage());
+                J3.setIcon(charTile);
             } else if (row == 4) {
-                J4.setIcon(character.getImage());
+                J4.setIcon(charTile);
             } else if (row == 5) {
-                J5.setIcon(character.getImage());
+                J5.setIcon(charTile);
             } else if (row == 6) {
-                J6.setIcon(character.getImage());
+                J6.setIcon(charTile);
             } else if (row == 7) {
-                J7.setIcon(character.getImage());
+                J7.setIcon(charTile);
             } else if (row == 8) {
-                J8.setIcon(character.getImage());
+                J8.setIcon(charTile);
             }
         }
     }
@@ -435,6 +510,18 @@ public class Overworld extends javax.swing.JFrame implements KeyListener {
         if (keyCode == KeyEvent.VK_RIGHT || keyCode == KeyEvent.VK_D) {
             if (col != 10) {
                 col++;
+            }else if(row == 5 && (enemy1.getHealth() <= 0 && enemy2.getHealth() <= 0 && enemy3.getHealth() <= 0)){
+                
+                if(area1Active){
+                    setArea2();
+                }else if(area2Active){
+                    setArea3();
+                }else if(area3Active){
+                    setArea1();
+                }
+                col = 1;
+                row = 5;
+                J5.setIcon(tile);
             }
 
         } else if (keyCode == KeyEvent.VK_LEFT || keyCode == KeyEvent.VK_A) {
@@ -456,25 +543,119 @@ public class Overworld extends javax.swing.JFrame implements KeyListener {
         updateCharacterLocation(gertrude, col, row);
         gertrude.setCol(col);
         gertrude.setRow(row);
-        if(gromlin.getHealth() <= 0){
+        if(enemy1.getHealth() > 0){
+            moveEnemies(enemy1, 1);
             
-        }else{
-            moveEnemies(gromlin);
         }
+        
+        if(enemy2.getHealth() > 0){
+            moveEnemies(enemy2, 2);
+            
+        }
+        
+        if(enemy3.getHealth() > 0){
+            moveEnemies(enemy3, 3);
+            
+        }
+        
+            
+        
     }
 
     public void keyReleased(KeyEvent e) {
         //not needed
     }
     
-    public void startBattle(AbstractCharacter enemy){
+    public int getEnemyAttack(){
+        if(enemy1Battle){
+            return enemy1.getAttack();
+        }else if(enemy2Battle){
+            return enemy2.getAttack();
+        }else{
+            return enemy3.getAttack();
+        }
+    }
+    
+    public int getEnemyHealth(){
+        if(enemy1Battle){
+            return enemy1.getHealth();
+        }else if(enemy2Battle){
+            return enemy2.getHealth();
+        }else{
+            System.out.println("1. " + enemy1Battle);
+            System.out.println("2. " + enemy2Battle);
+            return enemy3.getHealth();
+            
+        }
+    }
+    
+    public int getEnemyMaxHealth(){
+        if(enemy1Battle){
+            return enemy1.getMaxHealth();
+        }else if(enemy2Battle){
+            return enemy2.getMaxHealth();
+        }else{
+            return enemy3.getMaxHealth();
+        }
+    }
+    
+    public void setEnemyHealth(int health){
+        if(enemy1Battle){
+            enemy1.setHealth(health);
+        }else if(enemy2Battle){
+            enemy2.setHealth(health);
+            
+        }else{
+            enemy3.setHealth(health);
+        }
+    }
+    
+    public ImageIcon getEnemyImageIcon(){
+        if(enemy1Battle){
+            return enemy1.getBattleImage();
+        }else if(enemy2Battle){
+            return enemy2.getBattleImage();
+        }else{
+            return enemy3.getBattleImage();
+        }
+    }
+    
+    
+    
+    public void endEnemyBattle(){
+        if(enemy1Battle){
+            enemy1Battle = false;
+            updateCharacterLocation(enemy1, 0, 0);
+        }else if(enemy2Battle){
+            enemy2Battle = false;
+            updateCharacterLocation(enemy2, 0, 0);
+        }else if(enemy3Battle){
+            enemy3Battle = false;
+            updateCharacterLocation(enemy3, 0, 0);
+        }
+        if(enemy1.getHealth() <= 0 && enemy2.getHealth() <= 0 && enemy3.getHealth() <= 0){
+            lblPath.setText("----->");
+        }
+    }
+    
+    public int enemyAttack(){
+        if(enemy1Battle){
+            return enemy1.doDamage();
+        }else if(enemy2Battle){
+            return enemy2.doDamage();
+        }else{
+            return enemy3.doDamage();
+        }
+    }
+    
+    public void startBattle(){
         battles = new BattleS(this);
         battles.setVisible(true);
         this.setVisible(false);
         if (clip.isRunning()) clip.stop();
     }
 
-    public void moveEnemies(AbstractCharacter enemy) {
+    public void moveEnemies(AbstractCharacter enemy, int num) {
         int colPlayer = gertrude.getCol();
         int rowPlayer = gertrude.getRow();
         int colEnemy = enemy.getCol();
@@ -508,11 +689,23 @@ public class Overworld extends javax.swing.JFrame implements KeyListener {
             
         }
         if ((colEnemy == colPlayer ) && (rowEnemy == rowPlayer)) {
-                startBattle(enemy);
+            if(num == 1){
+                enemy1Battle = true;
+            }else if(num == 2){
+                enemy2Battle = true;
+            }else if(num == 3){
+                enemy3Battle = true;
+            }    
+            startBattle();
+                
+        } else{
+            updateCharacterLocation(enemy, colEnemy, rowEnemy);
+            enemy.setCol(colEnemy);
+            enemy.setRow(rowEnemy);
+            
         }
-        updateCharacterLocation(enemy, colEnemy, rowEnemy);
-        enemy.setCol(colEnemy);
-        enemy.setRow(rowEnemy);
+        
+        
     }
 
     /**
@@ -524,6 +717,7 @@ public class Overworld extends javax.swing.JFrame implements KeyListener {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblPath = new javax.swing.JLabel();
         B1 = new javax.swing.JLabel();
         A1 = new javax.swing.JLabel();
         B2 = new javax.swing.JLabel();
@@ -604,604 +798,527 @@ public class Overworld extends javax.swing.JFrame implements KeyListener {
         J8 = new javax.swing.JLabel();
         J5 = new javax.swing.JLabel();
         J6 = new javax.swing.JLabel();
+        lblArea = new javax.swing.JLabel();
+        lblLevel = new javax.swing.JLabel();
+        lblStage = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gertrogan");
-        setMaximumSize(new java.awt.Dimension(800, 800));
-        setMinimumSize(new java.awt.Dimension(800, 800));
+        setMaximumSize(new java.awt.Dimension(800, 850));
+        setMinimumSize(new java.awt.Dimension(800, 850));
         setName("Gertrogan Overworld"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(800, 850));
         setResizable(false);
+        getContentPane().setLayout(null);
+
+        lblPath.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblPath.setForeground(new java.awt.Color(255, 255, 255));
+        lblPath.setFocusCycleRoot(true);
+        getContentPane().add(lblPath);
+        lblPath.setBounds(720, 540, 70, 40);
 
         B1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         B1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         B1.setIconTextGap(0);
+        getContentPane().add(B1);
+        B1.setBounds(96, 217, 70, 70);
 
         A1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         A1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         A1.setIconTextGap(0);
+        getContentPane().add(A1);
+        A1.setBounds(19, 217, 70, 70);
 
         B2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         B2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         B2.setIconTextGap(0);
+        getContentPane().add(B2);
+        B2.setBounds(96, 294, 70, 70);
 
         A2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         A2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         A2.setIconTextGap(0);
+        getContentPane().add(A2);
+        A2.setBounds(19, 294, 70, 70);
 
         D1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         D1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         D1.setIconTextGap(0);
+        getContentPane().add(D1);
+        D1.setBounds(250, 217, 70, 70);
 
         C1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         C1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         C1.setIconTextGap(0);
+        getContentPane().add(C1);
+        C1.setBounds(173, 217, 70, 70);
 
         D2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         D2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         D2.setIconTextGap(0);
+        getContentPane().add(D2);
+        D2.setBounds(250, 294, 70, 70);
 
         C2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         C2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         C2.setIconTextGap(0);
+        getContentPane().add(C2);
+        C2.setBounds(173, 294, 70, 70);
 
         D4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         D4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         D4.setIconTextGap(0);
+        getContentPane().add(D4);
+        D4.setBounds(250, 448, 70, 70);
 
         C4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         C4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         C4.setIconTextGap(0);
+        getContentPane().add(C4);
+        C4.setBounds(173, 448, 70, 70);
 
         B3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         B3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         B3.setIconTextGap(0);
+        getContentPane().add(B3);
+        B3.setBounds(96, 371, 70, 70);
 
         A3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         A3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         A3.setIconTextGap(0);
+        getContentPane().add(A3);
+        A3.setBounds(19, 371, 70, 70);
 
         B4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         B4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         B4.setIconTextGap(0);
+        getContentPane().add(B4);
+        B4.setBounds(96, 448, 70, 70);
 
         A4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         A4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         A4.setIconTextGap(0);
+        getContentPane().add(A4);
+        A4.setBounds(19, 448, 70, 70);
 
         D3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         D3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         D3.setIconTextGap(0);
+        getContentPane().add(D3);
+        D3.setBounds(250, 371, 70, 70);
 
         C3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         C3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         C3.setIconTextGap(0);
+        getContentPane().add(C3);
+        C3.setBounds(173, 371, 70, 70);
 
         F2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         F2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         F2.setIconTextGap(0);
+        getContentPane().add(F2);
+        F2.setBounds(404, 294, 70, 70);
 
         E2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         E2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         E2.setIconTextGap(0);
+        getContentPane().add(E2);
+        E2.setBounds(327, 294, 70, 70);
 
         F4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         F4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         F4.setIconTextGap(0);
+        getContentPane().add(F4);
+        F4.setBounds(404, 448, 70, 70);
 
         E4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         E4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         E4.setIconTextGap(0);
+        getContentPane().add(E4);
+        E4.setBounds(327, 448, 70, 70);
 
         F3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         F3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         F3.setIconTextGap(0);
+        getContentPane().add(F3);
+        F3.setBounds(404, 371, 70, 70);
 
         F1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         F1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         F1.setIconTextGap(0);
+        getContentPane().add(F1);
+        F1.setBounds(404, 217, 70, 70);
 
         E3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         E3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         E3.setIconTextGap(0);
+        getContentPane().add(E3);
+        E3.setBounds(327, 371, 70, 70);
 
         E1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         E1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         E1.setIconTextGap(0);
+        getContentPane().add(E1);
+        E1.setBounds(327, 217, 70, 70);
 
         G4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         G4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         G4.setIconTextGap(0);
+        getContentPane().add(G4);
+        G4.setBounds(481, 448, 70, 70);
 
         G3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         G3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         G3.setIconTextGap(0);
+        getContentPane().add(G3);
+        G3.setBounds(481, 371, 70, 70);
 
         G1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         G1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         G1.setIconTextGap(0);
+        getContentPane().add(G1);
+        G1.setBounds(481, 217, 70, 70);
 
         G2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         G2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         G2.setIconTextGap(0);
+        getContentPane().add(G2);
+        G2.setBounds(481, 294, 70, 70);
 
         H4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         H4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         H4.setIconTextGap(0);
+        getContentPane().add(H4);
+        H4.setBounds(558, 448, 70, 70);
 
         H3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         H3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         H3.setIconTextGap(0);
+        getContentPane().add(H3);
+        H3.setBounds(558, 371, 70, 70);
 
         H1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         H1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         H1.setIconTextGap(0);
+        getContentPane().add(H1);
+        H1.setBounds(558, 217, 70, 70);
 
         H2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         H2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         H2.setIconTextGap(0);
+        getContentPane().add(H2);
+        H2.setBounds(558, 294, 70, 70);
 
         I4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         I4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         I4.setIconTextGap(0);
+        getContentPane().add(I4);
+        I4.setBounds(635, 448, 70, 70);
 
         I3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         I3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         I3.setIconTextGap(0);
+        getContentPane().add(I3);
+        I3.setBounds(635, 371, 70, 70);
 
         I1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         I1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         I1.setIconTextGap(0);
+        getContentPane().add(I1);
+        I1.setBounds(635, 217, 70, 70);
 
         I2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         I2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         I2.setIconTextGap(0);
+        getContentPane().add(I2);
+        I2.setBounds(635, 294, 70, 70);
 
         J4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         J4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         J4.setIconTextGap(0);
+        getContentPane().add(J4);
+        J4.setBounds(712, 448, 70, 70);
 
         J3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         J3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         J3.setIconTextGap(0);
+        getContentPane().add(J3);
+        J3.setBounds(712, 371, 70, 70);
 
         J1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         J1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         J1.setIconTextGap(0);
+        getContentPane().add(J1);
+        J1.setBounds(712, 217, 70, 70);
 
         J2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         J2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         J2.setIconTextGap(0);
+        getContentPane().add(J2);
+        J2.setBounds(712, 294, 70, 70);
 
         B7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         B7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         B7.setIconTextGap(0);
+        getContentPane().add(B7);
+        B7.setBounds(96, 679, 70, 70);
 
         A7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         A7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         A7.setIconTextGap(0);
+        getContentPane().add(A7);
+        A7.setBounds(19, 679, 70, 70);
 
         B8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         B8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         B8.setIconTextGap(0);
+        getContentPane().add(B8);
+        B8.setBounds(96, 756, 70, 70);
 
         A8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         A8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         A8.setIconTextGap(0);
+        getContentPane().add(A8);
+        A8.setBounds(19, 756, 70, 70);
 
         B5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         B5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         B5.setIconTextGap(0);
+        getContentPane().add(B5);
+        B5.setBounds(96, 525, 70, 70);
 
         A5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         A5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         A5.setIconTextGap(0);
+        getContentPane().add(A5);
+        A5.setBounds(19, 525, 70, 70);
 
         B6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         B6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         B6.setIconTextGap(0);
+        getContentPane().add(B6);
+        B6.setBounds(96, 602, 70, 70);
 
         A6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         A6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         A6.setIconTextGap(0);
+        getContentPane().add(A6);
+        A6.setBounds(19, 602, 70, 70);
 
         C7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         C7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         C7.setIconTextGap(0);
+        getContentPane().add(C7);
+        C7.setBounds(173, 679, 70, 70);
 
         C8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         C8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         C8.setIconTextGap(0);
+        getContentPane().add(C8);
+        C8.setBounds(173, 756, 70, 70);
 
         C5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         C5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         C5.setIconTextGap(0);
+        getContentPane().add(C5);
+        C5.setBounds(173, 525, 70, 70);
 
         C6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         C6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         C6.setIconTextGap(0);
+        getContentPane().add(C6);
+        C6.setBounds(173, 602, 70, 70);
 
         D7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         D7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         D7.setIconTextGap(0);
+        getContentPane().add(D7);
+        D7.setBounds(250, 679, 70, 70);
 
         D8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         D8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         D8.setIconTextGap(0);
+        getContentPane().add(D8);
+        D8.setBounds(250, 756, 70, 70);
 
         D5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         D5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         D5.setIconTextGap(0);
+        getContentPane().add(D5);
+        D5.setBounds(250, 525, 70, 70);
 
         D6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         D6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         D6.setIconTextGap(0);
+        getContentPane().add(D6);
+        D6.setBounds(250, 602, 70, 70);
 
         G7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         G7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         G7.setIconTextGap(0);
+        getContentPane().add(G7);
+        G7.setBounds(481, 679, 70, 70);
 
         G8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         G8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         G8.setIconTextGap(0);
+        getContentPane().add(G8);
+        G8.setBounds(481, 756, 70, 70);
 
         G5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         G5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         G5.setIconTextGap(0);
+        getContentPane().add(G5);
+        G5.setBounds(481, 525, 70, 70);
 
         G6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         G6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         G6.setIconTextGap(0);
+        getContentPane().add(G6);
+        G6.setBounds(481, 602, 70, 70);
 
         H7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         H7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         H7.setIconTextGap(0);
+        getContentPane().add(H7);
+        H7.setBounds(558, 679, 70, 70);
 
         H8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         H8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         H8.setIconTextGap(0);
+        getContentPane().add(H8);
+        H8.setBounds(558, 756, 70, 70);
 
         H5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         H5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         H5.setIconTextGap(0);
+        getContentPane().add(H5);
+        H5.setBounds(558, 525, 70, 70);
 
         H6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         H6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         H6.setIconTextGap(0);
+        getContentPane().add(H6);
+        H6.setBounds(558, 602, 70, 70);
 
         F7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         F7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         F7.setIconTextGap(0);
+        getContentPane().add(F7);
+        F7.setBounds(404, 679, 70, 70);
 
         E7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         E7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         E7.setIconTextGap(0);
+        getContentPane().add(E7);
+        E7.setBounds(327, 679, 70, 70);
 
         F8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         F8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         F8.setIconTextGap(0);
+        getContentPane().add(F8);
+        F8.setBounds(404, 756, 70, 70);
 
         E8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         E8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         E8.setIconTextGap(0);
+        getContentPane().add(E8);
+        E8.setBounds(327, 756, 70, 70);
 
         F5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         F5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         F5.setIconTextGap(0);
+        getContentPane().add(F5);
+        F5.setBounds(404, 525, 70, 70);
 
         E5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         E5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         E5.setIconTextGap(0);
+        getContentPane().add(E5);
+        E5.setBounds(327, 525, 70, 70);
 
         F6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         F6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         F6.setIconTextGap(0);
+        getContentPane().add(F6);
+        F6.setBounds(404, 602, 70, 70);
 
         E6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         E6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         E6.setIconTextGap(0);
+        getContentPane().add(E6);
+        E6.setBounds(327, 602, 70, 70);
 
         I7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         I7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         I7.setIconTextGap(0);
+        getContentPane().add(I7);
+        I7.setBounds(635, 679, 70, 70);
 
         I8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         I8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         I8.setIconTextGap(0);
+        getContentPane().add(I8);
+        I8.setBounds(635, 756, 70, 70);
 
         I5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         I5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         I5.setIconTextGap(0);
+        getContentPane().add(I5);
+        I5.setBounds(635, 525, 70, 70);
 
         I6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         I6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         I6.setIconTextGap(0);
+        getContentPane().add(I6);
+        I6.setBounds(635, 602, 70, 70);
 
         J7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         J7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         J7.setIconTextGap(0);
+        getContentPane().add(J7);
+        J7.setBounds(712, 679, 70, 70);
 
         J8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         J8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         J8.setIconTextGap(0);
+        getContentPane().add(J8);
+        J8.setBounds(712, 756, 70, 70);
 
         J5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         J5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         J5.setIconTextGap(0);
+        getContentPane().add(J5);
+        J5.setBounds(712, 525, 70, 70);
 
         J6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/tileDefault.png"))); // NOI18N
         J6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         J6.setIconTextGap(0);
+        getContentPane().add(J6);
+        J6.setBounds(712, 602, 70, 70);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(A1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(B1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(C1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(D1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(E1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(F1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(G1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(H1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(I1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(J1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(A2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(B2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(C2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(D2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(E2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(F2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(G2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(H2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(I2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(J2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(A3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(B3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(C3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(D3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(E3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(F3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(G3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(H3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(I3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(J3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(A4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(B4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(C4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(D4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(E4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(F4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(G4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(H4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(I4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(J4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(A5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(B5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(C5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(D5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(E5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(F5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(G5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(H5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(I5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(J5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(A6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(B6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(C6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(D6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(E6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(F6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(G6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(H6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(I6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(J6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(A7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(B7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(C7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(D7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(E7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(F7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(G7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(H7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(I7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(J7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(A8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(B8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(C8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(D8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(E8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(F8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(G8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(H8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(I8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(J8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(18, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(171, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(A1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(B1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(C1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(D1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(E1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(F1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(G1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(H1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(I1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(J1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(A2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(B2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(C2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(D2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(E2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(F2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(G2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(H2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(I2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(J2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(A3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(B3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(C3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(D3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(E3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(F3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(G3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(H3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(I3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(J3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(A4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(B4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(C4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(D4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(E4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(F4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(G4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(H4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(I4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(J4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(A5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(B5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(C5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(D5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(E5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(F5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(G5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(H5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(I5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(J5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(A6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(B6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(C6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(D6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(E6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(F6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(G6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(H6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(I6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(J6, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(A7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(B7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(C7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(D7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(E7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(F7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(G7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(H7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(I7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(J7, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(A8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(B8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(C8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(D8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(E8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(F8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(G8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(H8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(I8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(J8, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
-        );
+        lblArea.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
+        lblArea.setForeground(new java.awt.Color(255, 255, 255));
+        lblArea.setText("Area:");
+        getContentPane().add(lblArea);
+        lblArea.setBounds(660, 130, 120, 40);
+
+        lblLevel.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
+        lblLevel.setForeground(new java.awt.Color(255, 255, 255));
+        lblLevel.setText("Level: ");
+        getContentPane().add(lblLevel);
+        lblLevel.setBounds(660, 30, 120, 40);
+
+        lblStage.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
+        lblStage.setForeground(new java.awt.Color(255, 255, 255));
+        lblStage.setText("Stage:");
+        getContentPane().add(lblStage);
+        lblStage.setBounds(660, 80, 120, 40);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gertrogan/gertrogan UI.png"))); // NOI18N
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 800, 188);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1288,5 +1405,10 @@ public class Overworld extends javax.swing.JFrame implements KeyListener {
     private javax.swing.JLabel J6;
     private javax.swing.JLabel J7;
     private javax.swing.JLabel J8;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblArea;
+    private javax.swing.JLabel lblLevel;
+    private javax.swing.JLabel lblPath;
+    private javax.swing.JLabel lblStage;
     // End of variables declaration//GEN-END:variables
 }
