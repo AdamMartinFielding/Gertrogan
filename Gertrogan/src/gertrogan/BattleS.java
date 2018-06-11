@@ -10,7 +10,10 @@ import javax.swing.SwingUtilities;
 
 public class BattleS extends JFrame {
 Overworld overworld;
-    //constructor
+    /**
+     * constructor
+     * @param o 
+     */
     public BattleS(Overworld o) {
         overworld = o;
         initUI();

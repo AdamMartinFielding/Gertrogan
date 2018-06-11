@@ -13,17 +13,34 @@ public class BasicEnemy extends AbstractCharacter {
     //
 
 
-
+    /**
+     * Constructor for basic enemy
+     * @param health
+     * @param attack
+     * @param col
+     * @param row 
+     */
     public BasicEnemy(int health, int attack, int col, int row) {
         super(health, attack, col, row);
 
     }
-
+    /**
+     * Basic enemy constructor 2
+     * @param imageTile
+     * @param image
+     * @param health
+     * @param attack
+     * @param col
+     * @param row 
+     */
     public BasicEnemy(ImageIcon imageTile, ImageIcon image, int health, int attack, int col, int row) {
         super(imageTile, image, health, attack, col, row);
 
     }
-
+    /**
+     * will deal damage
+     * @return 
+     */
     public int doDamage() {
 
         int attackRoll = (int) (Math.random() * 100 + 1);
@@ -41,7 +58,10 @@ public class BasicEnemy extends AbstractCharacter {
 
     }
 
-
+    /**
+     * will set image for tile
+     * @param image 
+     */
     public void setTile(ImageIcon image){
         this.imageTile = image;
     }

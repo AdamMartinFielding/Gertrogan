@@ -41,11 +41,17 @@ public class TitleMenu extends javax.swing.JFrame implements KeyListener {
       }
         
     }
-
+    /**
+     * for import 
+     * @param e 
+     */
     public void keyTyped(KeyEvent e) {
         //not needed
     }
-
+    /**
+     * if key is pushed
+     * @param e 
+     */
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
  
