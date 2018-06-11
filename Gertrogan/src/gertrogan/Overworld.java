@@ -25,10 +25,10 @@ public class Overworld extends javax.swing.JFrame implements KeyListener {
     private ImageIcon DajingTile = new ImageIcon("src\\gertrogan\\tileDajing.png");
     private ImageIcon healthTile = new ImageIcon("src\\gertrogan\\tileHealth.png");
 
-    private ImageIcon protagonist = new ImageIcon("src\\gertrogan\\gertrude.png");
-    private ImageIcon gromlin = new ImageIcon("src\\gertrogan\\gromlin.png");
+    private ImageIcon protagonist = new ImageIcon("src\\gertrogan\\gertrude battle.png");
+    private ImageIcon gromlin = new ImageIcon("src\\gertrogan\\gromlin battle.png");
     private ImageIcon Bengurtle = new ImageIcon("src\\gertrogan\\Grogurt big.png");
-    private ImageIcon Dajing = new ImageIcon("src\\gertrogan\\Dajing.png");
+    private ImageIcon Dajing = new ImageIcon("src\\gertrogan\\Dajing battle.png");
     public Protagonist gertrude = new Protagonist(protagonistTile, protagonist, "gertrude", 100, 10, 1, 5);
     public BasicEnemy enemy1 = new BasicEnemy(gromlinTile, gromlin, 100, 10, 9, 2);
     public BasicEnemy enemy2 = new BasicEnemy(gromlinTile, gromlin, 0, 10, 9, 2);
@@ -97,7 +97,7 @@ public class Overworld extends javax.swing.JFrame implements KeyListener {
         area = 2;
         gertrude.setCol(1);
         gertrude.setRow(5);
-
+        healthUsed = false;
         E4.setIcon(healthTile);
 
         pbHealth.setMaximum(gertrude.getMaxHealth());
