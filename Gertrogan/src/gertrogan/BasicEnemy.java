@@ -12,8 +12,6 @@ public class BasicEnemy extends AbstractCharacter {
     //To do list
     //
 
-    
-private int attackPow;
 
 
     public BasicEnemy(int health, int attack, int col, int row) {
@@ -21,8 +19,8 @@ private int attackPow;
 
     }
 
-    public BasicEnemy(ImageIcon image, int health, int attack, int col, int row) {
-        super(image, health, attack, col, row);
+    public BasicEnemy(ImageIcon imageTile, ImageIcon image, int health, int attack, int col, int row) {
+        super(imageTile, image, health, attack, col, row);
 
     }
 
@@ -43,12 +41,9 @@ private int attackPow;
 
     }
 
-    public int getHealth() {
-        return health;
-    }
 
-    public void setHealth(int health) {
-        this.health = health;
+    public void setTile(ImageIcon image){
+        this.imageTile = image;
     }
 
 }

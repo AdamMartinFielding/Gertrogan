@@ -23,15 +23,20 @@ To-do
 public class Death extends javax.swing.JFrame implements KeyListener {
     private Clip clip;
     private TitleMenu titleMenu;
+    private HighScore score;
 
-    public Death() {
+    public Death(int stage, int level, int enemiesKilled) {
         initComponents();
         setFocusable(true);
         this.addKeyListener(this);
         
+        score = new HighScore("Adam", (stage * level * enemiesKilled));
+        System.out.println(score.getHighScores());
+        score.addHighScore();
+        System.out.println(score.getHighScores());
         try {
          // Open an audio input stream.
-            File soundFile = new File("src//gertrogan//Death Music.wav");
+            File soundFile = new File("src\\gertrogan\\Death Music.wav");
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
          // Get a sound clip resource.
             clip = AudioSystem.getClip();

@@ -18,8 +18,8 @@ public class Protagonist extends AbstractCharacter {
         
     }
     
-    public Protagonist(ImageIcon image,String name,int health, int attack, int col, int row){
-        super(image,health, attack, col, row);
+    public Protagonist(ImageIcon imageTile, ImageIcon image, String name,int health, int attack, int col, int row){
+        super(imageTile, image, health, attack, col, row);
         this.name = name;
         
     }

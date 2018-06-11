@@ -40,7 +40,8 @@ public class Battle extends JPanel implements KeyListener {
     private String eMessage = "";
     private boolean pushed;
     private int enemyHitDetector;
-    private Image player = new ImageIcon("src//gertrogan//gertrude.png").getImage();
+    private ImageIcon player;
+    private ImageIcon enemy;
     private int playerHealthPer;
     private int enemyHealthPer;
     
@@ -48,7 +49,7 @@ public class Battle extends JPanel implements KeyListener {
         
         try {
             // Open an audio input stream.
-            File soundFile = new File("src//gertrogan//Fight Music.wav");
+            File soundFile = new File("src\\gertrogan\\Fight Music.wav");
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
             // Get a sound clip resource.
             clip = AudioSystem.getClip();
@@ -65,9 +66,11 @@ public class Battle extends JPanel implements KeyListener {
         
         this.setBackground(Color.DARK_GRAY);
         overworld = o;
+        player = overworld.gertrude.getBattleImage();
+        enemy = overworld.getEnemyImageIcon();
         this.battleS = battleS;
         health = overworld.gertrude.getHealth();
-        enemyHealth = overworld.gromlin.getHealth();
+        enemyHealth = overworld.getEnemyHealth();
         ActionListener al = new ActionListener() {
             //when the timer ticks
             @Override
@@ -118,8 +121,8 @@ public class Battle extends JPanel implements KeyListener {
             hurt2 = damage;
         } else if (keyCode == KeyEvent.VK_SPACE && xSpeed == 0) {
             pushed = false;
-            enemyHitDetector = overworld.gromlin.doDamage();
-            enemyAttack = (overworld.gromlin.getAttack()) * (enemyHitDetector);
+            enemyHitDetector = overworld.enemyAttack();
+            enemyAttack = (overworld.getEnemyAttack()) * (enemyHitDetector);
             if (enemyHitDetector == 0) {
                 eMessage = "ENEMY MISSED! " + enemyAttack + " DAMAGE";
             } else if (enemyHitDetector == 1) {
@@ -143,9 +146,17 @@ public class Battle extends JPanel implements KeyListener {
     //will do the actual drawing
     private void doDrawing(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        g2d.drawImage(player, 170, 200, null);
+
+        g2d.drawImage(player.getImage(), 170, 200, null);
+        if(overworld.enemy3Battle){
+            g2d.drawImage(enemy.getImage(), 400, 150, null);
+        }else{
+            g2d.drawImage(enemy.getImage(), 570, 200, null);
+        }
         
-        g2d.setFont(new Font("Courier", Font.BOLD, 18));//will set font
+
+        g2d.setFont(new Font("Courier", Font.BOLD, 18));
+
         g2d.setColor(Color.black);
         g2d.fillRect(50, 650, 700, 50);
         g2d.fillRect(500, 400, 300, 200);//will draw text box 
@@ -175,8 +186,10 @@ public class Battle extends JPanel implements KeyListener {
         g2d.setColor(Color.black);//draw health bar background(enemy)
         g2d.fillRoundRect(500, 125, 200, 25, 20, 20);
         g2d.setColor(Color.red);
-        if (overworld.gertrude.getHealth() <= 0) { //if player dies
-            death = new Death();
+
+        if (overworld.gertrude.getHealth() <= 0) {
+             death = new Death(overworld.stage, 10, overworld.enemiesKilled);
+
             death.setVisible(true);
             battleS.setVisible(false);
             this.setVisible(false);
@@ -189,11 +202,12 @@ public class Battle extends JPanel implements KeyListener {
                 hurt2 -= 1;
             }
         }
-        overworld.gromlin.setHealth(enemyHealth);//will set enemies health
-        enemyHealthPer = (int) (((double) overworld.gromlin.getHealth() / (double) overworld.gromlin.getMaxHealth()) * 100);
+
+        overworld.setEnemyHealth(enemyHealth);//will set enemies health
+        enemyHealthPer = (int) (((double) overworld.getEnemyHealth() / (double) overworld.getEnemyMaxHealth()) * 100);
         g2d.fillRoundRect(500, 125, enemyHealthPer * 2, 25, 20, 20);//enemy health
         //if enemy dies will add exp and go back to overworld
-        if (overworld.gromlin.getHealth() <= 0) {
+        if (overworld.getEnemyHealth() <= 0) {
             overworld.gertrude.setExp(overworld.gertrude.getExp() + 20);
             if (overworld.gertrude.getExp() >= overworld.gertrude.getExpToNext()) {//if level up
                 overworld.gertrude.setExpToNext(overworld.gertrude.getExpToNext() + (20 * overworld.gertrude.getLevel())); //will raise exp high
@@ -201,7 +215,8 @@ public class Battle extends JPanel implements KeyListener {
                 overworld.gertrude.setExp(0);//will reset exp
             }
             //System.out.println(overworld.gertrude.getExp() + "/" + overworld.gertrude.getExpToNext() + " " +  overworld.gertrude.getLevel());
-            overworld.updateCharacterLocation(overworld.gromlin, 0, 0);
+            overworld.endEnemyBattle();
+
             overworld.updateCharacterLocation(overworld.gertrude, overworld.gertrude.getCol(), overworld.gertrude.getRow());
             overworld.setVisible(true);//will hide battle and bring back overworld
             battleS.setVisible(false);
