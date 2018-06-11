@@ -6,8 +6,9 @@ An Abstract Character class
 package gertrogan;
 
 import javax.swing.ImageIcon;
+
 abstract public class AbstractCharacter implements Character {
-    
+
     ImageIcon image;
     int col;
     int row;
@@ -15,7 +16,14 @@ abstract public class AbstractCharacter implements Character {
     int health;
     int maxHealth;
     boolean alive;
-
+    
+    /**
+     * constructor for abstract character
+     * @param health
+     * @param attack
+     * @param col
+     * @param row 
+     */
     public AbstractCharacter(int health, int attack, int col, int row) {
         this.col = col;
         this.row = row;
@@ -24,8 +32,15 @@ abstract public class AbstractCharacter implements Character {
         this.health = health;
         alive = true;
     }
-    
-    public AbstractCharacter(ImageIcon image,int health, int attack, int col, int row) {
+    /**
+     * Second constructor for abstract character
+     * @param image
+     * @param health
+     * @param attack
+     * @param col
+     * @param row 
+     */
+    public AbstractCharacter(ImageIcon image, int health, int attack, int col, int row) {
         this.col = col;
         this.row = row;
         this.attack = attack;
@@ -35,14 +50,14 @@ abstract public class AbstractCharacter implements Character {
         alive = true;
     }
     
-   public ImageIcon getImage(){
+    public ImageIcon getImage() {
         return image;
     }
 
     public int getMaxHealth() {
         return maxHealth;
     }
-   
+
     public int getCol() {
         return col;
     }
@@ -86,5 +101,6 @@ abstract public class AbstractCharacter implements Character {
             return health;
         }
     }
+
 
 }

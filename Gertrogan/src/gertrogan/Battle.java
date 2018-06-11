@@ -20,7 +20,7 @@ import javax.sound.sampled.*;
 import javax.swing.ImageIcon;
 
 public class Battle extends JPanel implements KeyListener {
-
+    
     private Clip clip;
     private boolean pressed = false;
     Overworld overworld;
@@ -43,9 +43,9 @@ public class Battle extends JPanel implements KeyListener {
     private Image player = new ImageIcon("src//gertrogan//gertrude.png").getImage();
     private int playerHealthPer;
     private int enemyHealthPer;
-
+    
     public Battle(Overworld o, BattleS battleS) {
-
+        
         try {
             // Open an audio input stream.
             File soundFile = new File("src//gertrogan//Fight Music.wav");
@@ -62,7 +62,7 @@ public class Battle extends JPanel implements KeyListener {
         } catch (LineUnavailableException e) {
             e.printStackTrace();
         }
-
+        
         this.setBackground(Color.DARK_GRAY);
         overworld = o;
         this.battleS = battleS;
@@ -94,11 +94,11 @@ public class Battle extends JPanel implements KeyListener {
         setFocusable(true);
         this.addKeyListener(this);
     }
-
+    
     public void keyTyped(KeyEvent e) {
         //not needed
     }
-
+    
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
         //will see if space bar is pressed to attack or to continue 
@@ -131,11 +131,11 @@ public class Battle extends JPanel implements KeyListener {
             first = true;
             xPos = 100;
             xSpeed = 15;
-
+            
         }
-
+        
     }
-
+    
     public void keyReleased(KeyEvent e) {
         //not needed
     }
@@ -144,17 +144,17 @@ public class Battle extends JPanel implements KeyListener {
     private void doDrawing(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(player, 170, 200, null);
-
-        g2d.setFont(new Font("Courier", Font.BOLD, 18));
+        
+        g2d.setFont(new Font("Courier", Font.BOLD, 18));//will set font
         g2d.setColor(Color.black);
         g2d.fillRect(50, 650, 700, 50);
-        g2d.fillRect(500, 400, 300, 200);
+        g2d.fillRect(500, 400, 300, 200);//will draw text box 
         g2d.setColor(Color.WHITE);
-        if (pushed == true) {
+        if (pushed == true) { //if the button is pushed will draw text for player
             g2d.drawString(message, 525, 500);
             g2d.drawString("(press space to continue)", 515, 550);
         }
-        if (pushed == false) {
+        if (pushed == false) { //if button is pushed agian enemy text will apear 
             g2d.drawString(eMessage, 525, 500);
         }
 
@@ -164,47 +164,54 @@ public class Battle extends JPanel implements KeyListener {
             first = false;
         }
         g2d.setColor(Color.pink);
-        g2d.fillRect(rand, 650, 400, 50);
+        g2d.fillRect(rand, 650, 400, 50); //will draw hit section and crit hit sections
         g2d.setColor(Color.red);
         g2d.fillRect(rand + 175, 650, 50, 50);
         g2d.setColor(Color.gray);
         g2d.fillRect(xPos, 650, 25, 50);
-
+        
         g2d.setColor(Color.black);//draw health bar background(player)
         g2d.fillRoundRect(100, 125, 200, 25, 20, 20);
         g2d.setColor(Color.black);//draw health bar background(enemy)
         g2d.fillRoundRect(500, 125, 200, 25, 20, 20);
         g2d.setColor(Color.red);
-        if (overworld.gertrude.getHealth() <= 0) {
-             death = new Death();
+        if (overworld.gertrude.getHealth() <= 0) { //if player dies
+            death = new Death();
             death.setVisible(true);
             battleS.setVisible(false);
             this.setVisible(false);
             if (clip.isRunning()) {
                 clip.stop();
             }
-        } else {
+        } else {//will make health bar look likes its moving down
             if (hurt2 > 0) {
                 enemyHealth -= 1;
                 hurt2 -= 1;
             }
         }
-        overworld.gromlin.setHealth(enemyHealth);
+        overworld.gromlin.setHealth(enemyHealth);//will set enemies health
         enemyHealthPer = (int) (((double) overworld.gromlin.getHealth() / (double) overworld.gromlin.getMaxHealth()) * 100);
         g2d.fillRoundRect(500, 125, enemyHealthPer * 2, 25, 20, 20);//enemy health
-
+        //if enemy dies will add exp and go back to overworld
         if (overworld.gromlin.getHealth() <= 0) {
+            overworld.gertrude.setExp(overworld.gertrude.getExp() + 20);
+            if (overworld.gertrude.getExp() >= overworld.gertrude.getExpToNext()) {//if level up
+                overworld.gertrude.setExpToNext(overworld.gertrude.getExpToNext() + (20 * overworld.gertrude.getLevel())); //will raise exp high
+                overworld.gertrude.setLevel(overworld.gertrude.getLevel() + 1);//will add level
+                overworld.gertrude.setExp(0);//will reset exp
+            }
+            //System.out.println(overworld.gertrude.getExp() + "/" + overworld.gertrude.getExpToNext() + " " +  overworld.gertrude.getLevel());
             overworld.updateCharacterLocation(overworld.gromlin, 0, 0);
             overworld.updateCharacterLocation(overworld.gertrude, overworld.gertrude.getCol(), overworld.gertrude.getRow());
-            overworld.setVisible(true);
+            overworld.setVisible(true);//will hide battle and bring back overworld
             battleS.setVisible(false);
             this.setVisible(false);
-            if (clip.isRunning()) {
+            if (clip.isRunning()) {//will stop music
                 clip.stop();
             }
             overworld.startMusic();
-
-        } else {
+            
+        } else {//will make health bar look likes its moving down
             if (hurt > 0) {
                 health -= 1;
                 hurt -= 1;
@@ -215,10 +222,10 @@ public class Battle extends JPanel implements KeyListener {
         g2d.fillRoundRect(100, 125, playerHealthPer * 2, 25, 20, 20); //Player health
 
     }
-
+    
     @Override
     public void paintComponent(Graphics g) {
-
+        
         super.paintComponent(g);//prepares the panel for drawing
         doDrawing(g);
     }
