@@ -1,6 +1,6 @@
 //Martin Holysh
 //May 28
-//Using 2d graphics to make battle scene 
+//Using 2D graphics to make battle scene, as well as running calculations for variables regarding health, attack, and running music
 package gertrogan;
 
 /**
@@ -20,7 +20,7 @@ import javax.sound.sampled.*;
 import javax.swing.ImageIcon;
 
 public class Battle extends JPanel implements KeyListener {
-    
+
     private Clip clip;
     private boolean pressed = false;
     Overworld overworld;
@@ -44,9 +44,15 @@ public class Battle extends JPanel implements KeyListener {
     private ImageIcon enemy;
     private int playerHealthPer;
     private int enemyHealthPer;
-    
+
+    /**
+     *
+     * @param o
+     * @param battleS
+     */
     public Battle(Overworld o, BattleS battleS) {
-        
+
+        //Implements the battle track into the game, looping it as long as the player battles
         try {
             // Open an audio input stream.
             File soundFile = new File("src\\gertrogan\\Fight Music.wav");
@@ -63,14 +69,19 @@ public class Battle extends JPanel implements KeyListener {
         } catch (LineUnavailableException e) {
             e.printStackTrace();
         }
-        
+        //Creates the background
         this.setBackground(Color.DARK_GRAY);
+        //Saving the state of overworld for later use
         overworld = o;
+        //Getting image resources of both player and enemy sprites
         player = overworld.gertrude.getBattleImage();
         enemy = overworld.getEnemyImageIcon();
+        //Create new battle form
         this.battleS = battleS;
+        //Getting health values of both enemy and players
         health = overworld.gertrude.getHealth();
         enemyHealth = overworld.getEnemyHealth();
+        //Opens an action listener to wait for player input
         ActionListener al = new ActionListener() {
             //when the timer ticks
             @Override
@@ -97,16 +108,27 @@ public class Battle extends JPanel implements KeyListener {
         setFocusable(true);
         this.addKeyListener(this);
     }
-    
+
+    /**
+     * Required only for import purposes
+     *
+     * @param e
+     */
     public void keyTyped(KeyEvent e) {
         //not needed
     }
-    
+
+    /**
+     * Code executed when a key is inputted
+     *
+     * @param e
+     */
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
         //will see if space bar is pressed to attack or to continue 
         if (keyCode == KeyEvent.VK_SPACE && xSpeed != 0) {
             pushed = true; //used for text
+            //stop the slider
             xSpeed = 0;
             if (xPos > rand + 175 && xPos < rand + 225) {//check to see if slider hits
                 damage = overworld.gertrude.getAttack() * 3;
@@ -118,7 +140,9 @@ public class Battle extends JPanel implements KeyListener {
                 damage = 0;
                 message = "MISS " + damage + " DAMAGE";
             }
+            //Animates health for visual effect
             hurt2 = damage;
+            //The enemy's turn to attack. Their own calculations play and a value is given where they hit, miss, or crit the player
         } else if (keyCode == KeyEvent.VK_SPACE && xSpeed == 0) {
             pushed = false;
             enemyHitDetector = overworld.enemyAttack();
@@ -132,31 +156,41 @@ public class Battle extends JPanel implements KeyListener {
             }
             hurt = enemyAttack;
             first = true;
+            //Restart the slider
             xPos = 100;
             xSpeed = 15;
-            
+
         }
-        
+
     }
-    
+
+    /**
+     * Required only for import purposes
+     *
+     * @param e
+     */
     public void keyReleased(KeyEvent e) {
         //not needed
     }
 
-    //will do the actual drawing
+    /**
+     * Method to draw the slider, health, and text box shapes
+     *
+     * @param g
+     */
     private void doDrawing(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-
+        //Draw coordinates and place images of player and enemy
         g2d.drawImage(player.getImage(), 100, 170, null);
-        if(overworld.enemy3Battle){
+        if (overworld.enemy3Battle) {
             g2d.drawImage(enemy.getImage(), 400, 150, null);
-        }else{
+        } else {
             g2d.drawImage(enemy.getImage(), 470, 160, null);
         }
-        
 
         g2d.setFont(new Font("Courier", Font.BOLD, 18));
 
+        //Draws the slider mechanic
         g2d.setColor(Color.black);
         g2d.fillRect(50, 650, 700, 50);
         g2d.fillRect(500, 400, 300, 200);//will draw text box 
@@ -180,7 +214,7 @@ public class Battle extends JPanel implements KeyListener {
         g2d.fillRect(rand + 175, 650, 50, 50);
         g2d.setColor(Color.gray);
         g2d.fillRect(xPos, 650, 25, 50);
-        
+
         g2d.setColor(Color.black);//draw health bar background(player)
         g2d.fillRoundRect(100, 125, 200, 25, 20, 20);
         g2d.setColor(Color.black);//draw health bar background(enemy)
@@ -188,7 +222,7 @@ public class Battle extends JPanel implements KeyListener {
         g2d.setColor(Color.red);
 
         if (overworld.gertrude.getHealth() <= 0) {
-             death = new Death(overworld.stage, 10, overworld.enemiesKilled);
+            death = new Death(overworld.stage, 10, overworld.enemiesKilled);
 
             death.setVisible(true);
             battleS.setVisible(false);
@@ -225,7 +259,7 @@ public class Battle extends JPanel implements KeyListener {
                 clip.stop();
             }
             overworld.startMusic();
-            
+
         } else {//will make health bar look likes its moving down
             if (hurt > 0) {
                 health -= 1;
@@ -237,10 +271,10 @@ public class Battle extends JPanel implements KeyListener {
         g2d.fillRoundRect(100, 125, playerHealthPer * 2, 25, 20, 20); //Player health
 
     }
-    
+
     @Override
     public void paintComponent(Graphics g) {
-        
+
         super.paintComponent(g);//prepares the panel for drawing
         doDrawing(g);
     }
