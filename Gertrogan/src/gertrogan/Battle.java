@@ -157,11 +157,11 @@ public class Battle extends JPanel implements KeyListener {
     private void doDrawing(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
 
-        g2d.drawImage(player.getImage(), 170, 200, null);
+        g2d.drawImage(player.getImage(), 100, 170, null);
         if(overworld.enemy3Battle){ //checking if enemy 3 is in battle
             g2d.drawImage(enemy.getImage(), 400, 150, null);
         }else{
-            g2d.drawImage(enemy.getImage(), 570, 200, null);
+            g2d.drawImage(enemy.getImage(), 470, 160, null);
         }
         
 
