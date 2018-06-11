@@ -41,11 +41,11 @@ public class HighScore {
     }
     
     public void addHighScore(){
+        String add = "\n" + playerName + "\n" + playerScore;
         try{
             FileWriter fw = new FileWriter("src\\gertrogan\\Highscores.txt", true);
             BufferedWriter bw = new BufferedWriter(fw);
-            bw.write("\n" + playerName + "\n");
-            bw.write(playerScore);
+            bw.write(add);
             bw.close();
         }catch(IOException e){
             System.out.println("Error: " + e);
