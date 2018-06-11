@@ -7,7 +7,9 @@ package gertrogan;
 
 
 import javax.swing.ImageIcon;
+
 abstract public class AbstractCharacter implements Character {
+
     
     ImageIcon imageTile;
     ImageIcon image;
@@ -18,6 +20,7 @@ abstract public class AbstractCharacter implements Character {
     private int maxHealth;
   
 
+
     public AbstractCharacter(int health, int attack, int col, int row) {
         this.col = col;
         this.row = row;
@@ -26,6 +29,7 @@ abstract public class AbstractCharacter implements Character {
         this.health = health;
 
     }
+
     
     public AbstractCharacter(ImageIcon imageTile, ImageIcon image, int health, int attack, int col, int row) {
         this.col = col;
@@ -38,8 +42,10 @@ abstract public class AbstractCharacter implements Character {
 
     }
     
+
    public ImageIcon getTile(){
         return imageTile;
+
     }
    
    public ImageIcon getBattleImage(){
@@ -49,7 +55,7 @@ abstract public class AbstractCharacter implements Character {
     public int getMaxHealth() {
         return maxHealth;
     }
-   
+
     public int getCol() {
         return col;
     }
@@ -81,6 +87,7 @@ abstract public class AbstractCharacter implements Character {
     public void setHealth(int health) {
         this.health = health;
     }
+
 
 
 }
