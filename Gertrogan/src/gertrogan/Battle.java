@@ -73,6 +73,10 @@ public class Battle extends JPanel implements KeyListener {
         enemyHealth = overworld.getEnemyHealth();
         ActionListener al = new ActionListener() {
             //when the timer ticks
+            /**
+             * will move slider 
+             * @param ae 
+             */
             @Override
             public void actionPerformed(ActionEvent ae) {
                 if (xPos > 724) {//will move slider 
@@ -97,11 +101,17 @@ public class Battle extends JPanel implements KeyListener {
         setFocusable(true);
         this.addKeyListener(this);
     }
-    
+    /**
+     * Required for 
+     * @param e 
+     */
     public void keyTyped(KeyEvent e) {
         //not needed
     }
-    
+    /**
+     * if key is pressed will do calculations for battle
+     * @param e 
+     */
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
         //will see if space bar is pressed to attack or to continue 
@@ -119,10 +129,10 @@ public class Battle extends JPanel implements KeyListener {
                 message = "MISS " + damage + " DAMAGE";
             }
             hurt2 = damage;
-        } else if (keyCode == KeyEvent.VK_SPACE && xSpeed == 0) {
+        } else if (keyCode == KeyEvent.VK_SPACE && xSpeed == 0) { //will see if enemy hit
             pushed = false;
             enemyHitDetector = overworld.enemyAttack();
-            enemyAttack = (overworld.getEnemyAttack()) * (enemyHitDetector);
+            enemyAttack = (overworld.getEnemyAttack()) * (enemyHitDetector); 
             if (enemyHitDetector == 0) {
                 eMessage = "ENEMY MISSED! " + enemyAttack + " DAMAGE";
             } else if (enemyHitDetector == 1) {
@@ -131,7 +141,7 @@ public class Battle extends JPanel implements KeyListener {
                 eMessage = "ENEMY CRIT " + enemyAttack + " DAMAGE";
             }
             hurt = enemyAttack;
-            first = true;
+            first = true; //will rerandomize slider 
             xPos = 100;
             xSpeed = 15;
             
@@ -148,7 +158,7 @@ public class Battle extends JPanel implements KeyListener {
         Graphics2D g2d = (Graphics2D) g;
 
         g2d.drawImage(player.getImage(), 170, 200, null);
-        if(overworld.enemy3Battle){
+        if(overworld.enemy3Battle){ //checking if enemy 3 is in battle
             g2d.drawImage(enemy.getImage(), 400, 150, null);
         }else{
             g2d.drawImage(enemy.getImage(), 570, 200, null);

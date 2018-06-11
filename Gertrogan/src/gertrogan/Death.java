@@ -24,7 +24,12 @@ public class Death extends javax.swing.JFrame implements KeyListener {
     private Clip clip;
     private TitleMenu titleMenu;
     private HighScore score;
-
+    /**
+     * Constructor 
+     * @param stage
+     * @param level
+     * @param enemiesKilled 
+     */
     public Death(int stage, int level, int enemiesKilled) {
         initComponents();
         setFocusable(true);

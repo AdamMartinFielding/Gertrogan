@@ -15,24 +15,32 @@ public class HighScore {
     
     
     
+    /**
+     * Constructor
+     * @param name
+     * @param score 
+     */
     public HighScore(String name, int score){
         playerScore = score;
         playerName = name;
     }
-    
+    /**
+     * accessor method for high score
+     * @return 
+     */
     public String getHighScores(){
         scores = new ArrayList();
         names = new ArrayList();
 
         String output = "";
         try{
-            FileReader fr = new FileReader("src\\gertrogan\\Highscores.txt");
+            FileReader fr = new FileReader("src\\gertrogan\\Highscores.txt"); //will read in high scores
             BufferedReader br = new BufferedReader(fr);
             boolean eof = false;
             output = br.readLine();
             int highScore;
             String name = " ";
-            while(!eof){
+            while(!eof){//while not end of file
                 name = br.readLine();
                 if(name == null){
                     eof = true;
@@ -86,7 +94,7 @@ public class HighScore {
             add += "Name: " + names.get(i) + "\nScore: " + scores.get(i);
         }
         try{
-            FileWriter fw = new FileWriter("src\\gertrogan\\Highscores.txt", true);
+            FileWriter fw = new FileWriter("src\\gertrogan\\Highscores.txt", true);//will write new high scores
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write(add);
             bw.close();
