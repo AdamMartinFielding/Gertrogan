@@ -25,7 +25,7 @@ public class TitleMenu extends javax.swing.JFrame implements KeyListener {
         
         try {
          // Open an audio input stream.
-            File soundFile = new File("src//gertrogan//Menu Music.wav");
+            File soundFile = new File("src\\gertrogan\\Menu Music.wav");
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
          // Get a sound clip resource.
             clip = AudioSystem.getClip();
@@ -50,7 +50,7 @@ public class TitleMenu extends javax.swing.JFrame implements KeyListener {
         int keyCode = e.getKeyCode();
 
         if (keyCode == KeyEvent.VK_M) {
-            death = new Death();
+            death = new Death(10, 10, 10);
             death.setVisible(true);
 
 

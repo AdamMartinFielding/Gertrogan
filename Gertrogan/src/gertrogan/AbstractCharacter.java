@@ -5,16 +5,18 @@ An Abstract Character class
  */
 package gertrogan;
 
+
 import javax.swing.ImageIcon;
 abstract public class AbstractCharacter implements Character {
     
+    ImageIcon imageTile;
     ImageIcon image;
-    int col;
-    int row;
-    int attack;
-    int health;
-    int maxHealth;
-    boolean alive;
+    private int col;
+    private int row;
+    private int attack;
+    private int health;
+    private int maxHealth;
+  
 
     public AbstractCharacter(int health, int attack, int col, int row) {
         this.col = col;
@@ -22,22 +24,27 @@ abstract public class AbstractCharacter implements Character {
         this.attack = attack;
         this.maxHealth = health;
         this.health = health;
-        alive = true;
+
     }
     
-    public AbstractCharacter(ImageIcon image,int health, int attack, int col, int row) {
+    public AbstractCharacter(ImageIcon imageTile, ImageIcon image, int health, int attack, int col, int row) {
         this.col = col;
         this.row = row;
         this.attack = attack;
         this.health = health;
         this.maxHealth = health;
+        this.imageTile = imageTile;
         this.image = image;
-        alive = true;
+
     }
     
-   public ImageIcon getImage(){
-        return image;
+   public ImageIcon getTile(){
+        return imageTile;
     }
+   
+   public ImageIcon getBattleImage(){
+       return image;
+   }
 
     public int getMaxHealth() {
         return maxHealth;
@@ -75,16 +82,5 @@ abstract public class AbstractCharacter implements Character {
         this.health = health;
     }
 
-    public int takeDamage(int health, int damage) {
-
-        health = health - damage;
-
-        if (health <= 0) {
-            alive = false;
-            return 0;
-        } else {
-            return health;
-        }
-    }
 
 }
