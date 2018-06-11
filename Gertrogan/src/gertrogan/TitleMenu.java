@@ -48,21 +48,11 @@ public class TitleMenu extends javax.swing.JFrame implements KeyListener {
 
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
-
-        if (keyCode == KeyEvent.VK_M) {
-            death = new Death(10, 10, 10);
-            death.setVisible(true);
-
-
-        } else {
+ 
+        overworld = new Overworld();
             
-            overworld = new Overworld();
-            
-            overworld.setVisible(true);
+        overworld.setVisible(true);
 
-            
-
-        }
         if (clip.isRunning()) clip.stop();
         this.setVisible(false);
     }

@@ -2,15 +2,15 @@
 Evan Hansen
 05/25/18
 An Abstract Character class
-Every entity will have an image, column, row, attack value, health value, and their maximum health pool
  */
 package gertrogan;
+
 
 import javax.swing.ImageIcon;
 
 abstract public class AbstractCharacter implements Character {
 
-    //The basic properties of any entity seen on screen
+    
     ImageIcon imageTile;
     ImageIcon image;
     private int col;
@@ -18,6 +18,8 @@ abstract public class AbstractCharacter implements Character {
     private int attack;
     private int health;
     private int maxHealth;
+  
+
 
     public AbstractCharacter(int health, int attack, int col, int row) {
         this.col = col;
@@ -28,6 +30,7 @@ abstract public class AbstractCharacter implements Character {
 
     }
 
+    
     public AbstractCharacter(ImageIcon imageTile, ImageIcon image, int health, int attack, int col, int row) {
         this.col = col;
         this.row = row;
@@ -36,16 +39,18 @@ abstract public class AbstractCharacter implements Character {
         this.maxHealth = health;
         this.imageTile = imageTile;
         this.image = image;
-    }
 
-    public ImageIcon getTile() {
+    }
+    
+
+   public ImageIcon getTile(){
         return imageTile;
 
     }
-
-    public ImageIcon getBattleImage() {
-        return image;
-    }
+   
+   public ImageIcon getBattleImage(){
+       return image;
+   }
 
     public int getMaxHealth() {
         return maxHealth;
@@ -82,5 +87,11 @@ abstract public class AbstractCharacter implements Character {
     public void setHealth(int health) {
         this.health = health;
     }
+    
+    public void setMaxHealth(int health){
+        this.maxHealth = health;
+    }
+
+
 
 }

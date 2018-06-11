@@ -1,7 +1,7 @@
 /*
- * Martin Holysh
- * May 28
- * JFrame meant to create a custom JFrame to use with the battle scenario
+ * B Cutten
+ * Sept 2014
+ * A test of the Graphics 2D in Java, code from http://zetcode.com/gfx/java2d/
  */
 package gertrogan;
 

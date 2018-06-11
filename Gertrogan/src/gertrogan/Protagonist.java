@@ -11,7 +11,7 @@ public class Protagonist extends AbstractCharacter {
     String name;
     int exp = 0;
     int level = 1;
-    int expToNext = 100;
+    int expToNext = 20;
     public Protagonist(String name,int health, int attack, int col, int row){
         super(health, attack, col, row);
         this.name = name;
